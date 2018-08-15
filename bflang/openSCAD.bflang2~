@@ -1,0 +1,573 @@
+<?xml version="1.0"?>
+<!--
+		Bluefish HTML Editor
+		openSCAD.bflang2 $Revision: 1 $
+
+		Copyright (C) 2008 Olivier Sessink
+
+	    This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or
+		(at your option) any later version.
+
+		This program is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+
+		You should have received a copy of the GNU General Public License
+		along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<bflang name="OpenSCAD" version="2.0" table="1438" contexts="1" matches="439">
+<header>
+	<mime type="application/x-openscad"/>
+	<mime type="text/x-openscad" />
+	<option name="show_in_menu" default="1"/>
+	<option name="load_reference" default="1" />
+	<option name="load_completion" default="1" />
+	<option name="C style comment_foldable" default="1" description="Allow folding of C style comments" />
+	<option name="Parentheses block_foldable" default="0" description="Allow folding of the Parentheses block" />
+	<option name="Square brackets block_foldable" default="0" description="Allow folding of Square brackets block"/>
+	<option name="Curly brackets block_foldable" default="1" description="Allow folding of Curly brackets block"/>
+	<option name="autocomplete_with_arguments" default="1" />
+	<option name="autocomplete_with_parentheses" default="0" />
+	<highlight name="attribute" style="attribute"  />
+	<highlight name="brackets" style="brackets"  />
+	<highlight name="comment" style="comment"  />
+	<highlight name="definition" style="special-tag"  />
+	<highlight name="import" style="special-tag2"  />
+	<highlight name="join" style="tag"  />
+	<highlight name="keyword" style="keyword"  />
+	<highlight name="func" style="special-keyword"  />
+	<highlight name="math" style="special-keyword"  />
+	<highlight name="operator" style="operator"  />
+	<highlight name="paren" style="brackets"  />
+	<highlight name="primitive" style="function"  />
+	<highlight name="special-variable" style="special-attribute"  />
+	<highlight name="string" style="string"  />
+	<highlight name="transform" style="special-function"  />
+	<highlight name="value" style="value"  />
+	<highlight name="boolean" style="string" />
+<!-- line modifiers -->
+	<highlight name="highlight" style="preprocessor"  />
+	<highlight name="disable" style="comment"  />
+	<highlight name="only" style="special-warning"  />
+	<highlight name="transparent" style="warning"  />
+</header>
+<properties>
+	<!-- <comment type="block" start="=start" end="=end" /> -->
+	<comment type="block" start="/*" end="*/" />
+	<comment type="line" start="//" />
+	<smartindent characters="{([" />
+	<smartoutdent characters="})]" />
+</properties>
+<definition>
+<context symbols=" ;(){}[]:\&#34;\\',&gt;&lt;*&amp;^%!+=-|/?#&#9;&#10;&#13;">
+<!-- The following must be defined early so it can be referenced in shapes-->
+<!-- Number & boolean values -->
+<group  highlight="value">
+<!-- Numbers -->
+	<element pattern="-?[0-9]*\.[0-9]+" is_regex="1" id="dec" />
+	<element pattern="-?[0-9]+" is_regex="1" id="num" />
+</group>
+<group highlight="boolean">
+	<autocomplete enable="1" />
+<!-- Boolean -->
+	<element pattern="true" id="true" />
+	<element pattern="false" id="false" />
+</group>
+<element pattern="&lt;" highlight="string" id="string">
+	<context symbols="\&gt;" highlight="string">
+		<element pattern="\\." is_regex="1" highlight="string"/>
+		<element pattern="&gt;" highlight="string" ends_context="1" />
+	</context>
+</element>
+
+<element pattern=";&#34;" highlight="string" id="string">
+	<context symbols="\&#34;" highlight="string">
+		<element pattern="\\." is_regex="1" highlight="string"/>
+		<element pattern="&#34;" highlight="string" ends_context="1" />
+	</context>
+</element>
+
+
+<element id="e.lbrace" pattern="{" starts_block="1" highlight="brackets" block_name="Curly brackets block"/>
+<element pattern="}" ends_block="1" blockstartelement="e.lbrace" highlight="brackets" />
+<element id="e.lbracket" pattern="[" starts_block="1" highlight="brackets" />
+<element id="e.rbracket" pattern="]" ends_block="1" blockstartelement="e.lbracket" highlight="brackets" />
+<element id="e.lparen" pattern="(" starts_block="1" highlight="paren" block_name="Parentheses block" />
+<element pattern=")" ends_block="1" blockstartelement="e.lparen" highlight="paren" />
+
+
+<element id="center" pattern="center" highlight="attribute">
+	<autocomplete enable="1" />
+	<reference>(boolean) 0,0,0 is center (default is corner for cube,square; cylinder is already centered on x,y; this only changes z)</reference>
+	<context symbols=" \=),">
+		<element pattern="true" highlight="boolean" ends_context="1"><autocomplete enable="1" /></element>
+		<element pattern="false" highlight="boolean" ends_context="1"><autocomplete enable="1" /></element>
+	</context>
+</element>
+
+<!-- End referenced elements-->
+
+<!-- Shapes -->
+<group  highlight="primitive">
+<!-- 2d Shapes -->
+<element pattern="square" highlight="primitive" >
+	<reference><b>Create a (2d) square.&#13;Params:</b> size=[<i>width,height</i>](<i>as vectors</i>), center(<i>boolean</i>)&#13;<b>Alt. Params:</b> size=<i>value</i>, center</reference>
+	<autocomplete enable="1" append="();" backup_cursor="2" />
+	<context symbols="([],\=&#10;&#13;: )">
+		<group highlight="attribute">
+			<autocomplete enable="1" />
+			<element idref="center" />
+			<element pattern="size"><reference>Square size (number or vectors)&#13;For non-matching dimensions, use vectors: [<i>width,heght</i>]</reference></element>
+			
+		</group>
+		<element idref="num"  />
+		<element idref="dec" />
+		<element idref="string" />
+		<element idref="e.lbracket" />
+		<element idref="e.rbracket" />
+		<element pattern="(" highlight="paren" />
+		<element pattern=")" ends_context="1" highlight="paren" />
+	</context>
+</element>
+
+<element pattern="circle" highlight="primitive" >
+	<reference><b>Create a (2d) circle.&#13;Params:</b> r=<i>radius</i>|d=<i>diameter</i>&#13;<b>Special Params:</b>$fn=<i>Number segments</i> | $fs=<i>segment size</i> | $fa=<i>segment angle(degrees)</i></reference>
+	<autocomplete enable="1" append="();" backup_cursor="2" />
+	<context symbols="([],\=&#10;&#13;: )">
+		<group highlight="attribute">
+			<autocomplete enable="1" />
+			<element idref="center" />
+			<element pattern="d"><reference>Diameter of circle</reference></element>
+			<element pattern="r"><reference>Radius of circle</reference></element>
+		</group>
+		<group highlight="special-variable">
+			<autocomplete enable="1" />
+			<element pattern="$fn"><reference>Number of segments</reference></element>
+			<element pattern="$fs"><reference>Segment size (in default units)</reference></element>
+			<element pattern="$fa"><reference>Segment Angle (in degrees)</reference></element>
+		</group>
+		<element idref="num"  />
+		<element idref="dec" />
+		<element idref="string" />
+		<element pattern="(" highlight="paren" />
+		<element pattern=")" ends_context="1" highlight="paren" />
+	</context>
+</element>
+
+<element pattern="polygon" highlight="primitive" >
+	<reference>Create a (2d) polygon (generic shape).&#13;Params: points=[[<i>x1,y1</i>],[<i>x2,y2</i>],...], paths=[[<i>point1,point2,point3</i>],[<i>point1,point2,point4</i>],...], convexity=<i>integer</i></reference>
+	<autocomplete enable="1" append="();" backup_cursor="2" />
+	<context symbols="([],\=&#10;&#13;: )">
+		<group highlight="attribute">
+			<autocomplete enable="1" />
+			<element idref="center" />
+			<element pattern="points"><reference>Vector of points. Each point is in turn a vector, [<i>x,y</i>], of its coordinates.</reference></element>
+			<element pattern="paths"><reference>Vector of the points specified in <i>points</i>. (See below) If ommitted, uses all points in order.&#13;<b>Single vector:</b> The order to traverse the points. Uses indices from 0 to n-1. May be in a different order and use all or part, of the points listed.&#13;<b>Multiple vectors</b> Creates primary and secondary shapes. Secondary shapes are subtracted from the primary shape (like difference). Secondary shapes may be wholly or partially within the primary shape.</reference></element>
+			<element pattern="convexity"><reference>Integer number of "inward" curves, ie. expected path crossings of an arbitrary line through the polygon</reference></element>
+			
+		</group>
+		<element idref="num"  />
+		<element idref="dec" />
+		<element idref="string" />
+		<element idref="e.lbracket" />
+		<element idref="e.rbracket" />
+		<element pattern="(" highlight="paren" />
+		<element pattern=")" ends_context="1" highlight="paren" />
+	</context>
+</element>
+
+<element pattern="text" highlight="primitive" >
+	<reference><b>Create a (2d) text.&#13;Params:</b> text=<i>text string</i>, size=<i>height(approx)</i>, font=<i>font face</i>, halign, valign, spacing, direction, language, script&#13;<b>Special Params:</b>$fn</reference>
+	<autocomplete enable="1" append="();" backup_cursor="2" />
+	<context symbols="([],\=&#10;&#13;: )">
+		<group highlight="attribute">
+			<autocomplete enable="1" />
+			<element idref="center" />
+			<element pattern="text"><reference>Text to draw</reference></element>
+			<element pattern="size"><reference>Text height (approx)</reference></element>
+			<element pattern="font"><reference>Font name &amp; style. Eg, &quot;Liberation Sans:style=Bold Italic&quot;</reference></element>
+			<element pattern="valign">
+				<reference>String. The vertical alignment for the text. Possible values are <i>top</i>, <i>center</i>, <i>baseline</i> and <i>bottom</i>. Default is <i>baseline</i>.</reference>
+				<context symbols="\=,) ">
+					<element pattern="&#34;" highlight="string"></element>
+					<element pattern="&#34;top&#34;" highlight="string" ends_context="1"><autocomplete enable="1" /></element>
+					<element pattern="&#34;center&#34;" highlight="string" ends_context="1"><autocomplete enable="1" /></element>
+					<element pattern="&#34;baseline&#34;" highlight="string" ends_context="1"><autocomplete enable="1" /></element>
+					<element pattern="&#34;bottom&#34;" highlight="string" ends_context="1"><autocomplete enable="1" /></element>
+				</context>
+			</element>
+			<element pattern="halign">
+				<reference>String. The horizontal alignment for the text. Possible values are <i>left</i>, <i>center</i> and <i>right</i>. Default is <i>left</i>.</reference>
+				<context symbols="\=,) ">
+					<element pattern="&#34;" highlight="string"></element>
+					<element pattern="&#34;left&#34;" highlight="string" ends_context="1"><autocomplete enable="1" /></element>
+					<element pattern="&#34;center&#34;" highlight="string" ends_context="1"><autocomplete enable="1" /></element>
+					<element pattern="&#34;right&#34;" highlight="string" ends_context="1"><autocomplete enable="1" /></element>
+				</context>
+			</element>
+			<element pattern="spacing"><reference>Decimal. Factor to increase/decrease the character spacing.</reference></element>
+			<element pattern="direction">
+				<reference>String. Direction of the text flow. Possible values are <i>ltr</i> (left-to-right), <i>rtl</i> (right-to-left), <i>ttb</i> (top-to-bottom) and <i>btt</i> (bottom-to-top). Default is <i>ltr</i>.</reference>
+				<context symbols="\=,) ">
+					<element pattern="&#34;" highlight="string"></element>
+					<element pattern="&#34;ltr&#34;" highlight="string" ends_context="1"><reference>Left to Right</reference><autocomplete enable="1" /></element>
+					<element pattern="&#34;rtl&#34;" highlight="string" ends_context="1"><reference>Right to Left</reference><autocomplete enable="1" /></element>
+					<element pattern="&#34;ttb&#34;" highlight="string" ends_context="1"><reference>Top to Bottom</reference><autocomplete enable="1" /></element>
+					<element pattern="&#34;btt&#34;" highlight="string" ends_context="1"><reference>Bottom to Top</reference><autocomplete enable="1" /></element>
+				</context>
+			</element>
+			<element pattern="language"><reference>String. The language of the text. Default is <i>en</i>.</reference></element>
+			<element pattern="script"><reference>String. The script of the text. Default is <i>latin</i>.</reference></element>
+		</group>
+		<group highlight="special-variable">
+			<autocomplete enable="1" />
+			<element pattern="$fn"><reference>Used for subdividing the curved path segments provided by freetype</reference></element>
+		</group>
+		<element idref="num"  />
+		<element idref="dec" />
+		<element idref="string" />
+		<element pattern="(" highlight="paren" />
+		<element pattern=")" ends_context="1" highlight="paren" />
+	</context>
+</element>
+<!-- 3d Shapes-->
+<element pattern="sphere" highlight="primitive" >
+	<reference><b>Create a (3d) sphere.&#13;Params:</b> radius | d=<i>diameter</i>&#13;<b>Special Params:</b>$fn=<i>Number segments</i> | $fs=<i>segment size</i> | $fa=<i>segment angle(degrees)</i></reference>
+	<autocomplete enable="1" append="();" backup_cursor="2" />
+	<context symbols="([],\=&#10;&#13;: )">
+		<group highlight="attribute">
+			<autocomplete enable="1" />
+			<element pattern="radius"><reference>Sphere Radius</reference></element>
+			<element pattern="d"><reference>Sphere Diameter</reference></element>
+		</group>
+		<group highlight="special-variable">
+			<autocomplete enable="1" />
+			<element pattern="$fn"><reference>Number of segments</reference></element>
+			<element pattern="$fs"><reference>Segment size (in default units)</reference></element>
+			<element pattern="$fa"><reference>Segment Angle (in degrees)</reference></element>
+		</group>
+		<element idref="num"  />
+		<element idref="dec" />
+		<!--<element idref="true" />
+		<element idref="false" />-->
+		<element idref="string" />
+		<!--<element idref="e.lbracket" />
+		<element idref="e.rbracket" />-->
+		<element pattern="(" highlight="paren" />
+		<element pattern=")" ends_context="1" highlight="paren" />
+	</context>
+</element>
+<element pattern="cube" highlight="primitive" >
+	<reference><b>Create a (3d) cube.&#13;Params:</b> size, center(<i>boolean</i>)&#13;<b>Alt. Params:</b> size, center</reference>
+	<autocomplete enable="1" append="();" backup_cursor="2" />
+	<context symbols="([],\=&#10;&#13;: )">
+		<group highlight="attribute">
+			<autocomplete enable="1" />
+			<element idref="center" />
+			<element pattern="size"><reference>Cube size (number or vectors)&#13;For non-matching dimensions, use vectors: [<i>width,depth,heght</i>]</reference></element>
+			
+		</group>
+		<element idref="num"  />
+		<element idref="dec" />
+		<element idref="string" />
+		<element idref="e.lbracket" />
+		<element idref="e.rbracket" />
+		<element pattern="(" highlight="paren" />
+		<element pattern=")" ends_context="1" highlight="paren" />
+	</context>
+</element>
+<element pattern="cylinder" highlight="primitive" >
+	<reference><b>Create a (3d) cylinder/cone.&#13;Params:</b> h=<i>height</i>, r=<i>Radius</i>|d=<i>diameter</i>, center(<i>boolean</i>)&#13;<b>Alt. Params: </b>h=<i>height</i>, r1=<i>bottom radius</i>|d1=<i>bottom diameter</i>, r2=<i>top radius</i>|d2=<i>top diameter</i>,center(<i>boolean</i>)&#13;<b>Special Params:</b>$fn=<i>Number segments</i> | $fs=<i>segment size</i> | $fa=<i>segment angle(degrees)</i></reference>
+	<autocomplete enable="1" append="();" backup_cursor="2" />
+	<context symbols="([],\=&#10;&#13;: )">
+		<group highlight="attribute">
+			<autocomplete enable="1" />
+			<element idref="center" />
+			<element pattern="h"><reference>Height of cylinder</reference></element>
+			<element pattern="d"><reference>Diameter of cylinder&#13;For a cone, use <b>d1</b> &amp; <b>d2</b> instead</reference></element>
+			<element pattern="r"><reference>Raduis of cylinder&#13;For a cone, use <b>r1</b> &amp; <b>r2</b> instead</reference></element>
+			<element pattern="d1"><reference>Bottom Diameter of cylinder (use with <b>d2</b> or <b>r2</b>)</reference></element>
+			<element pattern="d2"><reference>Top Diameter of cylinder (use with <b>d1</b> or <b>r1</b>)</reference></element>
+			<element pattern="r1"><reference>Bottom Radius of cylinder (use with <b>d2</b> or <b>r2</b>)</reference></element>
+			<element pattern="r2"><reference>Top Radius of cylinder (use with <b>d1</b> or <b>r1</b>)</reference></element>
+			
+		</group>
+		<group highlight="special-variable">
+			<autocomplete enable="1" />
+			<element pattern="$fn"><reference>Number of segments</reference></element>
+			<element pattern="$fs"><reference>Segment size (in default units)</reference></element>
+			<element pattern="$fa"><reference>Segment Angle (in degrees)</reference></element>
+		</group>
+		<element idref="num"  />
+		<element idref="dec" />
+		<element idref="string" />
+		<element idref="e.lbracket" />
+		<element idref="e.rbracket" />
+		<element pattern="(" highlight="paren" />
+		<element pattern=")" ends_context="1" highlight="paren" />
+	</context>
+</element>
+
+<element pattern="polyhedron" highlight="primitive" >
+	<reference>Create a (3d) polyhedron (generic solid).&#13;Params: points=[[<i>x1,y1,z1</i>],[<i>x2,y2,z2</i>],...], faces=[[<i>point1,point2,point3</i>],[<i>point1,point2,point4</i>],...], convexity=<i>integer (for preview mode only - see manual)</i></reference>
+	<autocomplete enable="1" append="();" backup_cursor="2" />
+	<context symbols="([],\=&#10;&#13;: )">
+		<group highlight="attribute">
+			<autocomplete enable="1" />
+			<element idref="center" />
+			<element pattern="points"><reference>Vector of 3d points or vertices. Each point is in turn a vector, [<i>x,y,z</i>], of its coordinates.</reference></element>
+			<element pattern="faces"><reference>Vector of faces which collectively enclose the solid. Each face is a vector containing the indices (0 based) of 3 or more points from the points vector.</reference></element>
+			<element pattern="convexity"><reference>Integer. The convexity parameter specifies the maximum number of faces a ray intersecting the object might penetrate. This parameter is only needed for correctly displaying the object in OpenCSG preview mode. It has no effect on the polyhedron rendering. For display problems, setting it to 10 should work fine for most cases. Default 1</reference></element>
+			
+		</group>
+		<element idref="num"  />
+		<element idref="dec" />
+		<element idref="string" />
+		<element idref="e.lbracket" />
+		<element idref="e.rbracket" />
+		<element pattern="(" highlight="paren" />
+		<element pattern=")" ends_context="1" highlight="paren" />
+	</context>
+</element>
+</group>
+<!-- Builtins -->
+<group  highlight="keyword">
+	<element pattern="if">
+		<autocomplete enable="1" append="()" backup_cursor="1" />
+		<reference>Performs a test to determine if the actions in a sub scope should be performed or not. Can be chained by following with <i>else</i> or <i>else if</i></reference>
+	</element>
+	<element pattern="else">
+		<autocomplete enable="1" />
+		<reference>Used after if. The actions in this sub scope will be performed when the <i>if</i> is false.</reference>
+	</element>
+	<element pattern="for">
+		<autocomplete enable="1" append="()" backup_cursor="1" />
+		<reference>Evaluate each value in a range or vector, applying it to the following Action(s). Shapes are joined with implicit union. See also intersection_for&#13;Usage examples: <i>for(i=[start:increment:end]) i will be set to start value, incremented each cycle until i > end.</i>&#13;<i>for(i=[vectors])</i> i will be set to each value in turn.&#13;<i>for(i=[start:inc:end],j=[start:inc:end])</i> i, j will each be incremented.</reference>
+	</element>
+	<element pattern="intersection_for">
+		<autocomplete enable="1" append="()" backup_cursor="1" />
+		<reference>Works same as for, but joins with intersection instead of union.</reference>
+	</element>
+	<element pattern="lookup">
+		<autocomplete enable="1" append="();" backup_cursor="2" />
+		<reference>Look up value in table, and linearly interpolate if there's no exact match. The first argument is the value to look up. The second is the lookup table -- a vector of key-value pairs.</reference>
+	</element>
+	<element pattern="echo">
+		<autocomplete enable="1" append="();" backup_cursor="2" />
+		<reference>This function prints the contents to the compilation window (aka Console). Useful for debugging code. Also see the String function <i>str()</i>.</reference>
+	</element>
+	<element pattern="let">
+		<autocomplete enable="1" append="();" backup_cursor="2" />
+		<reference>Sequential assignment of variables inside an expression. The following expression is evaluated in context of the let assignments and can use the variables. This is mainly useful to make complicated expressions more readable by assigning interim results to variables.</reference>
+	</element>
+</group>
+<!-- Special Variables -->
+<group  highlight="special-variable">
+	<autocomplete enable="1" />
+	<element pattern="$t">
+		<reference>Time variable in animation</reference>
+	</element>
+	<element pattern="$vpr">
+		<reference>
+			<b>$vpr, $vpt, $vpd</b> contain the current viewport rotation and translation and camera distance - at the time of doing the rendering.
+			Moving the viewport does not update them. During an animation they are updated for each frame.&#13;
+		   <i>$vpr</i> shows rotation&#13;
+		   <i>$vpt</i> shows translation (i.e. won't be affected by rotate and zoom)&#13;
+		   <i>$vpd</i> shows the camera distance&#13;
+      </reference>
+	</element>
+	<element pattern="$vpt">
+		<reference>
+			<b>$vpr, $vpt, $vpd</b> contain the current viewport rotation and translation and camera distance - at the time of doing the rendering.
+			Moving the viewport does not update them. During an animation they are updated for each frame.&#13;
+		   <i>$vpr</i> shows rotation&#13;
+		   <i>$vpt</i> shows translation (i.e. won't be affected by rotate and zoom)&#13;
+		   <i>$vpd</i> shows the camera distance&#13;</reference>
+	</element>
+	<element pattern="$vpd">
+		<reference>
+			<b>$vpr, $vpt, $vpd</b> contain the current viewport rotation and translation and camera distance - at the time of doing the rendering.
+			Moving the viewport does not update them. During an animation they are updated for each frame.&#13;
+		   <i>$vpr</i> shows rotation&#13;
+		   <i>$vpt</i> shows translation (i.e. won't be affected by rotate and zoom)&#13;
+		   <i>$vpd</i> shows the camera distance&#13;</reference>
+	</element>
+	<element pattern="$children">
+		<reference></reference>
+	</element>
+</group>
+
+<group  highlight="transform">
+	<autocomplete enable="1" append="()" backup_cursor="1" />
+<!-- Transforms -->
+	<element pattern="translate">
+	
+	</element>
+	<element pattern="rotate">
+	
+	</element>
+	<element pattern="scale">
+	
+	</element>
+	<element pattern="resize">
+	
+	</element>
+	<element pattern="mirror">
+	
+	</element>
+	<element pattern="offset">
+	
+	</element>
+	<element pattern="hull">
+	
+	</element>
+	<element pattern="multimatrix">
+	
+	</element>
+	<element pattern="color">
+	
+	</element>
+	<element pattern="minkowski">
+	
+	</element>
+	<element pattern="linear_extrude">
+	
+	</element>
+	<element pattern="rotate_extrude">
+	
+	</element>
+	<element pattern="projection">
+	
+	</element>
+	<element pattern="children">
+	
+	</element>
+</group>
+
+<group  highlight="math">
+	<autocomplete enable="1" append="()" backup_cursor="1" />
+<!-- Math -->
+	<element pattern="abs"></element>
+	<element pattern="acos"></element>
+	<element pattern="asin"></element>
+	<element pattern="atan"></element>
+	<element pattern="atan2"></element>
+	<element pattern="ceil"></element>
+	<element pattern="cos"></element>
+	<element pattern="exp"></element>
+	<element pattern="floor"></element>
+	<element pattern="ln"></element>
+	<element pattern="log"></element>
+	<element pattern="sqrt"></element>
+	<element pattern="tan"></element>
+	<element pattern="sin"></element>
+	<element pattern="sign"></element>
+	<element pattern="round"></element>
+	<element pattern="rands"></element>
+	<element pattern="pow"></element>
+	<element pattern="min"></element>
+	<element pattern="max"></element>
+	<element pattern="str"></element>
+	<element pattern="len"></element>
+</group>
+
+<group highlight="func">
+	<autocomplete enable="1" append="()" backup_cursor="1" />
+	<element pattern="concat"></element>
+	<element pattern="chr"></element>
+	<element pattern="search"></element>
+	<element pattern="version"></element>
+	<element pattern="version_num"></element>
+	<element pattern="norm"></element>
+	<element pattern="cross"></element>
+	<element pattern="parent_module"></element>
+</group>
+
+<group highlight="definition">
+	<autocomplete enable="1" append=" " />
+	<element pattern="function" identifier_mode="1" identifier_jump="1" identifier_autocomp="1">
+		<reference>Functions operate on values to calculate and return new values. See also module.&#13;<i>function name(parameters) = return_value;</i></reference>
+	</element> 
+	<element pattern="module" identifier_mode="1" identifier_jump="1" identifier_autocomp="1">
+		<reference>Modules can be used to define objects or, using children(), define operators. Once defined, modules are temporarily added to the language.&#13;<i>module name(parameters) { actions }</i></reference>
+	</element>
+</group>
+
+<group highlight="import">
+	<autocomplete enable="1" append=" &lt;&gt;;" backup_cursor="2" />
+	<element pattern="include">
+		<reference>Include the specified file.&#13;<i>include &lt;file.scad&gt;</i>&#13;Acts as if the contents of the included file were written in the including file.&#13;See also <i>use</i></reference>
+	</element>
+	<element pattern="use">
+		<reference>Include the specified file.&#13;<i>include &lt;file.scad&gt;</i>&#13;Imports modules and functions, but does not execute any commands other than those definitions.&#13;See also <i>include</i></reference>
+	</element>
+</group>
+
+<group highlight="import">
+	<autocomplete enable="1" append="();" backup_cursor="2" />
+	<element pattern="import">
+		<reference>Imports a DXF, OFF or STL file for use in the current OpenSCAD model. The file extension is used to determine which type. Use <i>surface</i> to import png.&#13;<b>Parameters: </b> file, convexity, layer</reference>
+		<context symbols="([],\=&#10;&#13;: )">
+			<group highlight="attribute">
+				<autocomplete enable="1" />
+				<element idref="center" />
+				<element pattern="file"><reference>String containing the path to the STL, OFF or DXF file.</reference></element>
+				<element pattern="layer"><reference>For DXF import only, specify a specific layer to import. Optional.</reference></element>
+				<element pattern="convexity"><reference>Integer. The convexity parameter specifies the maximum number of front sides (back sides) a ray intersecting the object might penetrate. This parameter is only needed for correctly displaying the object in OpenCSG preview mode and has no effect on the final rendering.</reference></element>
+			</group>
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="surface">
+		<autocomplete enable="1" append="();" backup_cursor="2" />
+		<reference>Reads Heightmap information from text or image files. Currently only supports PNG.&#13;<b>Parameters: </b> file, center, invert, convexity</reference>
+		<context symbols="([],\=&#10;&#13;: )">
+			<group highlight="attribute">
+				<autocomplete enable="1" />
+				<element idref="center" />
+				<element pattern="file"><reference>The path to the file containing the heightmap data.</reference></element>
+				<element pattern="invert"><reference> Inverts how the color values of imported images are translated into height values. This has no effect when importing text data files. Defaults to false.</reference></element>
+				<element pattern="convexity"><reference>Integer. The convexity parameter specifies the maximum number of front sides (back sides) a ray intersecting the object might penetrate. This parameter is only needed for correctly displaying the object in OpenCSG preview mode and has no effect on the final rendering.</reference></element>
+			</group>
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+</group>
+
+<group highlight="join">
+	<autocomplete enable="1" append="() {" backup_cursor="3" />
+<!-- joins -->
+	<element pattern="difference"></element>
+	<element pattern="union"></element>
+	<element pattern="intersection"></element>
+	<element pattern="render"></element>
+</group>
+
+<element id="pod" pattern="=[a-zA-Z][a-zA-Z0-9 _]*[&#10;&#13;]" is_regex="1" starts_block="1" mayfold="1" highlight="comment" />
+<element pattern="=cut" ends_block="1" blockstartelement="pod" highlight="comment" />
+
+<element pattern="//[^&#10;&#13;]*" is_regex="1" highlight="comment" />
+<element pattern="#[^&#10;&#13;]*" is_regex="1" highlight="highlight"><reference>Highlight in preview</reference></element>
+<element pattern="\*[^&#10;&#13;]*" is_regex="1" highlight="disable"><reference>Disable in preview/render</reference></element>
+<element pattern="![^&#10;&#13;]*" is_regex="1" highlight="only"><reference>Render only this</reference></element>
+<element pattern="%[^&#10;&#13;]*" is_regex="1" highlight="transparent"><reference>Transparent in preview</reference></element>
+
+</context>
+</definition>
+</bflang>
