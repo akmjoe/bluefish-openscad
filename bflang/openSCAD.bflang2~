@@ -2,8 +2,8 @@
 <!--
 		Bluefish HTML Editor
 		openSCAD.bflang2 $Revision: 1 $
-
-		Copyright (C) 2008 Olivier Sessink
+		
+		@author akmjoe
 
 	    This program is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
@@ -47,6 +47,7 @@
 	<highlight name="special-variable" style="special-attribute"  />
 	<highlight name="string" style="string"  />
 	<highlight name="transform" style="special-function"  />
+	<highlight name="user_function" style="special-keyword"  />
 	<highlight name="value" style="value"  />
 	<highlight name="boolean" style="string" />
 <!-- line modifiers -->
@@ -84,7 +85,7 @@
 	</context>
 </element>
 
-<element pattern=";&#34;" highlight="string" id="string">
+<element pattern="&#34;" highlight="string" id="string">
 	<context symbols="\&#34;" highlight="string">
 		<element pattern="\\." is_regex="1" highlight="string"/>
 		<element pattern="&#34;" highlight="string" ends_context="1" />
@@ -497,6 +498,16 @@
 	</element>
 </group>
 
+<!--<group highlight="user_function">
+	<autocomplete enable="1" append=" " />
+	<element pattern="function" identifier_mode="2" identifier_jump="1" identifier_autocomp="1">
+		<reference>Function defined in this file</reference>
+	</element> 
+	<element pattern="module" identifier_mode="2" identifier_jump="1" identifier_autocomp="1">
+		<reference>Module defined in this file</reference>
+	</element>
+</group>-->
+
 <group highlight="import">
 	<autocomplete enable="1" append=" &lt;&gt;;" backup_cursor="2" />
 	<element pattern="include">
@@ -511,7 +522,7 @@
 	<autocomplete enable="1" append="();" backup_cursor="2" />
 	<element pattern="import">
 		<reference>Imports a DXF, OFF or STL file for use in the current OpenSCAD model. The file extension is used to determine which type. Use <i>surface</i> to import png.&#13;<b>Parameters: </b> file, convexity, layer</reference>
-		<context symbols="([],\=&#10;&#13;: )">
+		<context symbols="([],\=&#10;&#13;: &#34;)">
 			<group highlight="attribute">
 				<autocomplete enable="1" />
 				<element idref="center" />
@@ -531,7 +542,7 @@
 	<element pattern="surface">
 		<autocomplete enable="1" append="();" backup_cursor="2" />
 		<reference>Reads Heightmap information from text or image files. Currently only supports PNG.&#13;<b>Parameters: </b> file, center, invert, convexity</reference>
-		<context symbols="([],\=&#10;&#13;: )">
+		<context symbols="([],\=&#10;&#13;: &#34;)">
 			<group highlight="attribute">
 				<autocomplete enable="1" />
 				<element idref="center" />

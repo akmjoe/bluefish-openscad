@@ -2,8 +2,8 @@
 <!--
 		Bluefish HTML Editor
 		openSCAD.bflang2 $Revision: 1 $
-
-		Copyright (C) 2008 Olivier Sessink
+		
+		@author akmjoe
 
 	    This program is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
@@ -497,16 +497,6 @@
 		<reference>Modules can be used to define objects or, using children(), define operators. Once defined, modules are temporarily added to the language.&#13;<i>module name(parameters) { actions }</i></reference>
 	</element>
 </group>
-
-<!--<group highlight="user_function">
-	<autocomplete enable="1" append=" " />
-	<element pattern="function" identifier_mode="2" identifier_jump="1" identifier_autocomp="1">
-		<reference>Function defined in this file</reference>
-	</element> 
-	<element pattern="module" identifier_mode="2" identifier_jump="1" identifier_autocomp="1">
-		<reference>Module defined in this file</reference>
-	</element>
-</group>-->
 
 <group highlight="import">
 	<autocomplete enable="1" append=" &lt;&gt;;" backup_cursor="2" />
