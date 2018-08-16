@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<snippets>
+
+
+
+
+
+<branch title="2D Shapes"><leaf type="insert" title="Circle" tooltip=""><before>circle(diameter=%0);</before><after/><param name="Diameter"/></leaf><leaf type="insert" title="Square" tooltip=""><before>square([%0,%1]);</before><after/><param name="Width"/><param name="Height"/></leaf></branch><branch title="3D Shapes"><leaf type="insert" title="Cube" tooltip=""><before>cube([%0,%1,%2]);</before><after/><param name="Width"/><param name="Depth"/><param name="Height"/></leaf><leaf type="insert" title="Cylinder" tooltip=""><before>cylinder(h=%0,d=%1);</before><after/><param name="Height"/><param name="Diameter"/></leaf><leaf type="insert" title="Cone" tooltip=""><before>cylinder(h=%0,d1=%1,d2=%2);</before><after/><param name="Height"/><param name="Bottom Diameter"/><param name="Top Diameter"/></leaf><leaf type="insert" title="Sphere" tooltip=""><before>sphere(d=%0);</before><after/><param name="Diameter"/></leaf></branch><branch title="Transformations"><leaf type="insert" title="Linear Extrude" tooltip=""><before>linear_extrude(height=%0) {
+</before><after>
+}</after><param name="Height"/></leaf><leaf type="insert" title="Mirror" tooltip=""><before>mirror([%0,%1,%2]) {
+</before><after>
+}</after><param name="Mirror X (0 or 1)"/><param name="Mirror Y (0 or 1)"/><param name="Mirror Z (0 or 1)"/></leaf><leaf type="insert" title="Resize" tooltip=""><before>resize([%0,%1,%2]) {
+</before><after>
+}</after><param name="New Size X"/><param name="New Size Y"/><param name="New Size Z"/></leaf><leaf type="insert" title="Rotate" tooltip=""><before>rotate([%0,%1,%2]) {
+</before><after>
+}</after><param name="Degrees X"/><param name="Degrees Y"/><param name="Degrees Z"/></leaf><leaf type="insert" title="Rotate Extrude" tooltip=""><before>rotate_extrude(angle=%0) {
+</before><after>
+}</after><param name="Angle (degrees)"/></leaf><leaf type="insert" title="Scale" tooltip=""><before>scale([%0,%1,%2]) {
+</before><after>
+}</after><param name="Proportion X"/><param name="Proportion Y"/><param name="Proportion Z"/></leaf><leaf type="insert" title="Translate" tooltip=""><before>translate([%0,%1,%2]) {
+</before><after>
+}</after><param name="X"/><param name="Y"/><param name="Z"/></leaf></branch><branch title="Boolean Operations"><leaf type="insert" title="Difference" tooltip=""><before>difference() {
+</before><after>
+}</after></leaf><leaf type="insert" title="Intersection" tooltip=""><before>intersection() {
+</before><after>
+}</after></leaf><leaf type="insert" title="Union (Join)" tooltip=""><before>union() {
+</before><after>
+}</after></leaf></branch><branch title="Loops"><leaf type="insert" title="For Loop (union)" tooltip=""><before>for(%0 = [%1:%2:%3]) {
+</before><after>
+}</after><param name="Iterator Variable"/><param name="Start Value"/><param name="Increment Amount"/><param name="End Value"/></leaf><leaf type="insert" title="For Loop (intersection)" tooltip=""><before>intersection_for(%0 = [%1:%2:%3]) {
+</before><after>
+}</after><param name="Iterator Variable"/><param name="Start Value"/><param name="Increment Value"/><param name="End Value"/></leaf><leaf type="insert" title="If" tooltip=""><before>if() {
+</before><after>
+}</after><param name="Condition"/></leaf></branch><branch title="File Import"><leaf type="insert" title="Import Drawing" tooltip=""><before>import(file="%0");</before><after/><param name="File (dxf,stl)" is_file="1"/></leaf><leaf type="insert" title="Include File" tooltip=""><before>include(%0);</before><after/><param name="File" is_file="1"/></leaf><leaf type="insert" title="Import Module" tooltip=""><before>use(%0);</before><after/><param name="File" is_file="1"/></leaf></branch><branch title="Other"><leaf type="insert" title="Echo" tooltip=""><before>echo(</before><after>);</after></leaf><leaf type="insert" title="Disable Element" tooltip=""><before>*</before><after/></leaf><leaf type="insert" title="Highlight in Preview" tooltip=""><before>#</before><after/></leaf><leaf type="insert" title="Show Only This Element" tooltip=""><before>!</before><after/></leaf><leaf type="insert" title="Transparent in Preview" tooltip=""><before>%</before><after/></leaf><leaf type="insert" title="New Function" tooltip=""><before>function %0 (%1) = %2;</before><after/><param name="Function Name"/><param name="Parameters"/><param name="Formula"/></leaf><leaf type="insert" title="New Module" tooltip="Create a canned script"><before>module %0(%1) {
+</before><after>
+}</after><param name="Module Name"/><param name="Parameters"/></leaf><leaf type="insert" title="New Variable" tooltip="Create new Variable"><before>%0 = %1;</before><after/><param name="Variable Name"/><param name="Value"/></leaf></branch>
+
+
+
+</snippets>
