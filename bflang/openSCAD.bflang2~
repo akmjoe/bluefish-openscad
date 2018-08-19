@@ -32,6 +32,8 @@
 	<option name="Curly brackets block_foldable" default="1" description="Allow folding of Curly brackets block"/>
 	<option name="autocomplete_with_arguments" default="1" />
 	<option name="autocomplete_with_parentheses" default="0" />
+	<option name="append_braces" default="1" description="Automatically add semicolon"/>
+	<option name="append_semicolon" default="1" description="Automatically add curly braces"/>
 	<highlight name="attribute" style="attribute"  />
 	<highlight name="brackets" style="brackets"  />
 	<highlight name="comment" style="comment"  />
@@ -69,8 +71,8 @@
 <!-- Number & boolean values -->
 <group  highlight="value">
 <!-- Numbers -->
-	<element pattern="-?[0-9]*\.[0-9]+" is_regex="1" id="dec" />
-	<element pattern="-?[0-9]+" is_regex="1" id="num" />
+	<element pattern="[0-9]*\.[0-9]+" is_regex="1" id="dec" />
+	<element pattern="[0-9]+" is_regex="1" id="num" />
 </group>
 <group highlight="boolean">
 	<autocomplete enable="1" />
@@ -117,8 +119,9 @@
 <!-- 2d Shapes -->
 <element pattern="square" highlight="primitive" >
 	<reference><b>Create a (2d) square.&#13;Params:</b> size=[<i>width,height</i>](<i>as vectors</i>), center(<i>boolean</i>)&#13;<b>Alt. Params:</b> size=<i>value</i>, center</reference>
-	<autocomplete enable="1" append="();" backup_cursor="2" />
-	<context symbols="([],\=&#10;&#13;: )">
+	<autocomplete class="append_semicolon" append="();" backup_cursor="2" />
+	<autocomplete notclass="append_semicolon" append="()" backup_cursor="1" />
+	<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
 		<group highlight="attribute">
 			<autocomplete enable="1" />
 			<element idref="center" />
@@ -137,8 +140,9 @@
 
 <element pattern="circle" highlight="primitive" >
 	<reference><b>Create a (2d) circle.&#13;Params:</b> r=<i>radius</i>|d=<i>diameter</i>&#13;<b>Special Params:</b>$fn=<i>Number segments</i> | $fs=<i>segment size</i> | $fa=<i>segment angle(degrees)</i></reference>
-	<autocomplete enable="1" append="();" backup_cursor="2" />
-	<context symbols="([],\=&#10;&#13;: )">
+	<autocomplete class="append_semicolon" append="();" backup_cursor="2" />
+	<autocomplete notclass="append_semicolon" append="()" backup_cursor="1" />
+	<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
 		<group highlight="attribute">
 			<autocomplete enable="1" />
 			<element idref="center" />
@@ -161,8 +165,9 @@
 
 <element pattern="polygon" highlight="primitive" >
 	<reference>Create a (2d) polygon (generic shape).&#13;Params: points=[[<i>x1,y1</i>],[<i>x2,y2</i>],...], paths=[[<i>point1,point2,point3</i>],[<i>point1,point2,point4</i>],...], convexity=<i>integer</i></reference>
-	<autocomplete enable="1" append="();" backup_cursor="2" />
-	<context symbols="([],\=&#10;&#13;: )">
+	<autocomplete class="append_semicolon" append="();" backup_cursor="2" />
+	<autocomplete notclass="append_semicolon" append="()" backup_cursor="1" />
+	<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
 		<group highlight="attribute">
 			<autocomplete enable="1" />
 			<element idref="center" />
@@ -183,8 +188,9 @@
 
 <element pattern="text" highlight="primitive" >
 	<reference><b>Create a (2d) text.&#13;Params:</b> text=<i>text string</i>, size=<i>height(approx)</i>, font=<i>font face</i>, halign, valign, spacing, direction, language, script&#13;<b>Special Params:</b>$fn</reference>
-	<autocomplete enable="1" append="();" backup_cursor="2" />
-	<context symbols="([],\=&#10;&#13;: )">
+	<autocomplete class="append_semicolon" append="();" backup_cursor="2" />
+	<autocomplete notclass="append_semicolon" append="()" backup_cursor="1" />
+	<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
 		<group highlight="attribute">
 			<autocomplete enable="1" />
 			<element idref="center" />
@@ -238,11 +244,12 @@
 <!-- 3d Shapes-->
 <element pattern="sphere" highlight="primitive" >
 	<reference><b>Create a (3d) sphere.&#13;Params:</b> radius | d=<i>diameter</i>&#13;<b>Special Params:</b>$fn=<i>Number segments</i> | $fs=<i>segment size</i> | $fa=<i>segment angle(degrees)</i></reference>
-	<autocomplete enable="1" append="();" backup_cursor="2" />
-	<context symbols="([],\=&#10;&#13;: )">
+	<autocomplete class="append_semicolon" append="();" backup_cursor="2" />
+	<autocomplete notclass="append_semicolon" append="()" backup_cursor="1" />
+	<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
 		<group highlight="attribute">
 			<autocomplete enable="1" />
-			<element pattern="radius"><reference>Sphere Radius</reference></element>
+			<element pattern="r"><reference>Sphere Radius</reference></element>
 			<element pattern="d"><reference>Sphere Diameter</reference></element>
 		</group>
 		<group highlight="special-variable">
@@ -264,8 +271,9 @@
 </element>
 <element pattern="cube" highlight="primitive" >
 	<reference><b>Create a (3d) cube.&#13;Params:</b> size, center(<i>boolean</i>)&#13;<b>Alt. Params:</b> size, center</reference>
-	<autocomplete enable="1" append="();" backup_cursor="2" />
-	<context symbols="([],\=&#10;&#13;: )">
+	<autocomplete class="append_semicolon" append="();" backup_cursor="2" />
+	<autocomplete notclass="append_semicolon" append="()" backup_cursor="1" />
+	<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
 		<group highlight="attribute">
 			<autocomplete enable="1" />
 			<element idref="center" />
@@ -283,8 +291,9 @@
 </element>
 <element pattern="cylinder" highlight="primitive" >
 	<reference><b>Create a (3d) cylinder/cone.&#13;Params:</b> h=<i>height</i>, r=<i>Radius</i>|d=<i>diameter</i>, center(<i>boolean</i>)&#13;<b>Alt. Params: </b>h=<i>height</i>, r1=<i>bottom radius</i>|d1=<i>bottom diameter</i>, r2=<i>top radius</i>|d2=<i>top diameter</i>,center(<i>boolean</i>)&#13;<b>Special Params:</b>$fn=<i>Number segments</i> | $fs=<i>segment size</i> | $fa=<i>segment angle(degrees)</i></reference>
-	<autocomplete enable="1" append="();" backup_cursor="2" />
-	<context symbols="([],\=&#10;&#13;: )">
+	<autocomplete class="append_semicolon" append="();" backup_cursor="2" />
+	<autocomplete notclass="append_semicolon" append="()" backup_cursor="1" />
+	<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
 		<group highlight="attribute">
 			<autocomplete enable="1" />
 			<element idref="center" />
@@ -315,8 +324,9 @@
 
 <element pattern="polyhedron" highlight="primitive" >
 	<reference>Create a (3d) polyhedron (generic solid).&#13;Params: points=[[<i>x1,y1,z1</i>],[<i>x2,y2,z2</i>],...], faces=[[<i>point1,point2,point3</i>],[<i>point1,point2,point4</i>],...], convexity=<i>integer (for preview mode only - see manual)</i></reference>
-	<autocomplete enable="1" append="();" backup_cursor="2" />
-	<context symbols="([],\=&#10;&#13;: )">
+	<autocomplete class="append_semicolon" append="();" backup_cursor="2" />
+	<autocomplete notclass="append_semicolon" append="()" backup_cursor="1" />
+	<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
 		<group highlight="attribute">
 			<autocomplete enable="1" />
 			<element idref="center" />
@@ -340,6 +350,15 @@
 	<element pattern="if">
 		<autocomplete enable="1" append="()" backup_cursor="1" />
 		<reference>Performs a test to determine if the actions in a sub scope should be performed or not. Can be chained by following with <i>else</i> or <i>else if</i></reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
 	</element>
 	<element pattern="else">
 		<autocomplete enable="1" />
@@ -348,27 +367,68 @@
 	<element pattern="for">
 		<autocomplete enable="1" append="()" backup_cursor="1" />
 		<reference>Evaluate each value in a range or vector, applying it to the following Action(s). Shapes are joined with implicit union. See also intersection_for&#13;Usage examples: <i>for(i=[start:increment:end]) i will be set to start value, incremented each cycle until i > end.</i>&#13;<i>for(i=[vectors])</i> i will be set to each value in turn.&#13;<i>for(i=[start:inc:end],j=[start:inc:end])</i> i, j will each be incremented.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
 	</element>
 	<element pattern="intersection_for">
 		<autocomplete enable="1" append="()" backup_cursor="1" />
 		<reference>Works same as for, but joins with intersection instead of union.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
 	</element>
 	<element pattern="lookup">
-		<autocomplete enable="1" append="();" backup_cursor="2" />
+		<autocomplete class="append_semicolon" append="();" backup_cursor="2" />
+		<autocomplete notclass="append_semicolon" append="()" backup_cursor="1" />
 		<reference>Look up value in table, and linearly interpolate if there's no exact match. The first argument is the value to look up. The second is the lookup table -- a vector of key-value pairs.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
 	</element>
 	<element pattern="echo">
-		<autocomplete enable="1" append="();" backup_cursor="2" />
+		<autocomplete class="append_semicolon" append="();" backup_cursor="2" />
+		<autocomplete notclass="append_semicolon" append="()" backup_cursor="1" />
 		<reference>This function prints the contents to the compilation window (aka Console). Useful for debugging code. Also see the String function <i>str()</i>.</reference>
 	</element>
 	<element pattern="let">
-		<autocomplete enable="1" append="();" backup_cursor="2" />
+		<autocomplete class="append_semicolon" append="();" backup_cursor="2" />
+		<autocomplete notclass="append_semicolon" append="()" backup_cursor="1" />
 		<reference>Sequential assignment of variables inside an expression. The following expression is evaluated in context of the let assignments and can use the variables. This is mainly useful to make complicated expressions more readable by assigning interim results to variables.</reference>
 	</element>
 </group>
 <!-- Special Variables -->
 <group  highlight="special-variable">
 	<autocomplete enable="1" />
+	<!-- Circle segments -->
+	<element pattern="$fn">
+		<reference>Number of segments</reference>
+	</element>
+	<element pattern="$fs">
+		<reference>Segment size (in default units)</reference>
+	</element>
+	<element pattern="$fa">
+		<reference>Segment Angle (in degrees)</reference>
+	</element>
+	<!-- Other -->
 	<element pattern="$t">
 		<reference>Time variable in animation</reference>
 	</element>
@@ -403,7 +463,8 @@
 </group>
 
 <group  highlight="transform">
-	<autocomplete enable="1" append="()" backup_cursor="1" />
+	<autocomplete class="append_braces" append="() {}" backup_cursor="4" />
+	<autocomplete notclass="append_braces" append="()" backup_cursor="1" />
 <!-- Transforms -->
 	<element pattern="translate">
 	
@@ -423,16 +484,10 @@
 	<element pattern="offset">
 	
 	</element>
-	<element pattern="hull">
-	
-	</element>
 	<element pattern="multimatrix">
 	
 	</element>
 	<element pattern="color">
-	
-	</element>
-	<element pattern="minkowski">
 	
 	</element>
 	<element pattern="linear_extrude">
@@ -445,6 +500,17 @@
 	
 	</element>
 	<element pattern="children">
+	
+	</element>
+</group>
+<group highlight="transform">
+	<autocomplete class="append_braces" append="() {}" backup_cursor="1" />
+	<autocomplete notclass="append_braces" append="()" />
+	
+	<element pattern="hull">
+	
+	</element>
+	<element pattern="minkowski">
 	
 	</element>
 </group>
@@ -498,16 +564,6 @@
 	</element>
 </group>
 
-<!--<group highlight="user_function">
-	<autocomplete enable="1" append=" " />
-	<element pattern="function" identifier_mode="2" identifier_jump="1" identifier_autocomp="1">
-		<reference>Function defined in this file</reference>
-	</element> 
-	<element pattern="module" identifier_mode="2" identifier_jump="1" identifier_autocomp="1">
-		<reference>Module defined in this file</reference>
-	</element>
-</group>-->
-
 <group highlight="import">
 	<autocomplete enable="1" append=" &lt;&gt;;" backup_cursor="2" />
 	<element pattern="include">
@@ -519,7 +575,8 @@
 </group>
 
 <group highlight="import">
-	<autocomplete enable="1" append="();" backup_cursor="2" />
+	<autocomplete class="append_semicolon" append="();" backup_cursor="2" />
+	<autocomplete notclass="append_semicolon" append="()" backup_cursor="1" />
 	<element pattern="import">
 		<reference>Imports a DXF, OFF or STL file for use in the current OpenSCAD model. The file extension is used to determine which type. Use <i>surface</i> to import png.&#13;<b>Parameters: </b> file, convexity, layer</reference>
 		<context symbols="([],\=&#10;&#13;: &#34;)">
@@ -540,7 +597,8 @@
 		</context>
 	</element>
 	<element pattern="surface">
-		<autocomplete enable="1" append="();" backup_cursor="2" />
+		<autocomplete class="append_semicolon" append="();" backup_cursor="2" />
+		<autocomplete notclass="append_semicolon" append="()" backup_cursor="1" />
 		<reference>Reads Heightmap information from text or image files. Currently only supports PNG.&#13;<b>Parameters: </b> file, center, invert, convexity</reference>
 		<context symbols="([],\=&#10;&#13;: &#34;)">
 			<group highlight="attribute">
@@ -562,7 +620,8 @@
 </group>
 
 <group highlight="join">
-	<autocomplete enable="1" append="() {" backup_cursor="3" />
+	<autocomplete class="append_braces" append="() {}" backup_cursor="1" />
+	<autocomplete notclass="append_braces" append="()" />
 <!-- joins -->
 	<element pattern="difference"></element>
 	<element pattern="union"></element>
@@ -575,7 +634,7 @@
 
 <element pattern="//[^&#10;&#13;]*" is_regex="1" highlight="comment" />
 <element pattern="#[^&#10;&#13;]*" is_regex="1" highlight="highlight"><reference>Highlight in preview</reference></element>
-<element pattern="\*[^&#10;&#13;]*" is_regex="1" highlight="disable"><reference>Disable in preview/render</reference></element>
+<element pattern="[&#9;&#10;&#13;][ ]*\*[^&#10;&#13;]*" is_regex="1" highlight="disable"><reference>Disable in preview/render</reference></element>
 <element pattern="![^&#10;&#13;]*" is_regex="1" highlight="only"><reference>Render only this</reference></element>
 <element pattern="%[^&#10;&#13;]*" is_regex="1" highlight="transparent"><reference>Transparent in preview</reference></element>
 
