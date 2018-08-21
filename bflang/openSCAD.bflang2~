@@ -67,6 +67,145 @@
 </properties>
 <definition>
 <context symbols=" ;(){}[]:\&#34;\\',&gt;&lt;*&amp;^%!+=-|/?#&#9;&#10;&#13;">
+<context id="functions" symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+	<element idref="num"  />
+	<element idref="dec" />
+	<element idref="string" />
+	<element idref="e.lbracket" />
+	<element idref="e.rbracket" />
+	<element pattern="(" highlight="paren" />
+	<element pattern=")" ends_context="1" highlight="paren" />
+
+	<group  highlight="math">
+		<autocomplete enable="1" append="()" backup_cursor="1" />
+		<element pattern="abs" id="abs">
+			<reference>Absolute value of a signed decimal (converts negative to positive)</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="acos" id="acos">
+			<reference>Arccosine, or inverse cossine (in degrees)</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="asin" id="asin">
+			<reference>Arcsine, or inverse sine (in degrees)</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="atan" id="atan">
+			<reference>Arctangent, or inverse tangent (in degrees)</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="atan2" id="atan2">
+			<reference>Two-argument atan function. Returns the principal value of the arc tangent of y/x, expressed in degrees.</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="ceil" id="ceil">
+			<reference>Rounds up to the next integer</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="cos" id="cos">
+			<reference>Cosine of angle (deggrees)</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="exp" id="exp">
+			<reference>Returns the base-e exponential function of x, which is the number e raised to the power x.</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="floor" id="floor">
+			<reference>Rounds down to the next integer.</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="ln" id="ln">
+			<reference>Natural Logarithm</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="log" id="log">
+			<reference></reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="sqrt" id="sqrt">
+			<reference>Square Root</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="tan" id="tan">
+			<reference>Tangent of angle (degrees)</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="sin" id="sin">
+			<reference>Sine of angle (degrees)</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="sign" id="sign">
+			<reference>Signum function. Returns a unit value that extracts the sign of a value.</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="round" id="round">
+			<reference>Round up/down to next integer.</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="rands" id="rands">
+			<reference>Random number generator. Parameters: minimum value, maximum value, value count, seed value (optional)</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="pow" id="pow">
+			<reference>Mathematical power function. Parameters: base, exponent.</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="min" id="min">
+			<reference>Returns the minimum of the parameters. Parameters can be a list of numbers or a vector.</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="max" id="max">
+			<reference>Returns the maximum of the parameters. Parameters can be a list of numbers or a vector.</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="len" id="len">
+			<reference>Returns the length of an array, vector or string.</reference>
+			<context idref="functions" />
+		</element>
+	</group>
+	
+	<!-- Other builtin functions -->
+	<group highlight="func">
+		<autocomplete enable="1" append="()" backup_cursor="1" />
+		<element pattern="str" id="str">
+			<reference>Convert all arguments to strings and concatenate.</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="concat" id="concat">
+			<reference>Returns a vector containing all the arguments</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="chr" id="chr">
+			<reference>Unicode character</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="search" id="search">
+			<reference>The search() function is a general-purpose function to find one or more (or all) occurrences of a value or list of values in a vector, string or more complex list-of-list construct. </reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="version" id="version">
+			<reference>Returns the OpenSCAD version as a vector, e.g. [2011, 09, 23]</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="version_num" id="version_num">
+			<reference>Returns the OpenSCAD version as a number, e.g. 20110923</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="norm" id="norm">
+			<reference>Returns the euclidean norm of a vector. Note this returns the actual numeric length while len returns the number of elements in the vector or array. </reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="cross" id="cross">
+			<reference>Calculates the cross product of two vectors in 3D space. The result is a vector that is perpendicular to both of the input vectors.</reference>
+			<context idref="functions" />
+		</element>
+		<element pattern="parent_module" id="parent_module">
+			<reference></reference>
+			<context idref="functions" />
+		</element>
+	</group>
+
+</context>
 <!-- The following must be defined early so it can be referenced in shapes-->
 <!-- Number & boolean values -->
 <group  highlight="value">
@@ -81,9 +220,10 @@
 	<element pattern="false" id="false" />
 </group>
 <element pattern="&lt;" highlight="string" id="string">
-	<context symbols="\&gt;" highlight="string">
+	<context symbols="\&gt; \=&#13;&#10;" highlight="string">
 		<element pattern="\\." is_regex="1" highlight="string"/>
 		<element pattern="&gt;" highlight="string" ends_context="1" />
+		<element pattern="[&#13;&#10; =]" is_regex="1" ends_context="1" />
 	</context>
 </element>
 
@@ -95,11 +235,17 @@
 </element>
 
 
-<element id="e.lbrace" pattern="{" starts_block="1" highlight="brackets" block_name="Curly brackets block"/>
+<element id="e.lbrace" pattern="{" starts_block="1" highlight="brackets" block_name="Curly brackets block">
+	<autocomplete enable="1" append="}" backup_cursor="1" />
+</element>
 <element pattern="}" ends_block="1" blockstartelement="e.lbrace" highlight="brackets" />
-<element id="e.lbracket" pattern="[" starts_block="1" highlight="brackets" />
+<element id="e.lbracket" pattern="[" starts_block="1" highlight="brackets">
+	<autocomplete enable="1" append="]" backup_cursor="1" />
+</element>
 <element id="e.rbracket" pattern="]" ends_block="1" blockstartelement="e.lbracket" highlight="brackets" />
-<element id="e.lparen" pattern="(" starts_block="1" highlight="paren" block_name="Parentheses block" />
+<element id="e.lparen" pattern="(" starts_block="1" highlight="paren" block_name="Parentheses block">
+	<autocomplete enable="1" append=")" backup_cursor="1" />
+</element>
 <element pattern=")" ends_block="1" blockstartelement="e.lparen" highlight="paren" />
 
 
@@ -111,6 +257,375 @@
 		<element pattern="false" highlight="boolean" ends_context="1"><autocomplete enable="1" /></element>
 	</context>
 </element>
+
+<!-- Math -->
+<group  highlight="math">
+	<autocomplete enable="1" append="()" backup_cursor="1" />
+	<element pattern="abs" id="abs">
+		<reference>Absolute value of a signed decimal (converts negative to positive)</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="acos" id="acos">
+		<reference>Arccosine, or inverse cossine (in degrees)</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="asin" id="asin">
+		<reference>Arcsine, or inverse sine (in degrees)</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="atan" id="atan">
+		<reference>Arctangent, or inverse tangent (in degrees)</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="atan2" id="atan2">
+		<reference>Two-argument atan function. Returns the principal value of the arc tangent of y/x, expressed in degrees.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="ceil" id="ceil">
+		<reference>Rounds up to the next integer</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="cos" id="cos">
+		<reference>Cosine of angle (deggrees)</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="exp" id="exp">
+		<reference>Returns the base-e exponential function of x, which is the number e raised to the power x.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="floor" id="floor">
+		<reference>Rounds down to the next integer.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="ln" id="ln">
+		<reference>Natural Logarithm</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="log" id="log">
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="sqrt" id="sqrt">
+		<reference>Square Root</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="tan" id="tan">
+		<reference>Tangent of angle (degrees)</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="sin" id="sin">
+		<reference>Sine of angle (degrees)</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="sign" id="sign">
+		<reference>Signum function. Returns a unit value that extracts the sign of a value.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="round" id="round">
+		<reference>Round up/down to next integer.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="rands" id="rands">
+		<reference>Random number generator. Parameters: minimum value, maximum value, value count, seed value (optional)</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="pow" id="pow">
+		<reference>Mathematical power function. Parameters: base, exponent.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="min" id="min">
+		<reference>Returns the minimum of the parameters. Parameters can be a list of numbers or a vector.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="max" id="max">
+		<reference>Returns the maximum of the parameters. Parameters can be a list of numbers or a vector.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="len" id="len">
+		<reference>Returns the length of an array, vector or string.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+</group>
+
+<!-- Other builtin functions -->
+<group highlight="func">
+	<autocomplete enable="1" append="()" backup_cursor="1" />
+	<element pattern="str" id="str">
+		<reference>Convert all arguments to strings and concatenate.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="concat" id="concat">
+		<reference>Returns a vector containing all the arguments</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="chr" id="chr">
+		<reference>Unicode character</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="search" id="search">
+		<reference>The search() function is a general-purpose function to find one or more (or all) occurrences of a value or list of values in a vector, string or more complex list-of-list construct. </reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="version" id="version">
+		<reference>Returns the OpenSCAD version as a vector, e.g. [2011, 09, 23]</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="version_num" id="version_num">
+		<reference>Returns the OpenSCAD version as a number, e.g. 20110923</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="norm" id="norm">
+		<reference>Returns the euclidean norm of a vector. Note this returns the actual numeric length while len returns the number of elements in the vector or array. </reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="cross" id="cross">
+		<reference>Calculates the cross product of two vectors in 3D space. The result is a vector that is perpendicular to both of the input vectors.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+	<element pattern="parent_module" id="parent_module">
+		<reference></reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+		</context>
+	</element>
+</group>
 
 <!-- End referenced elements-->
 
@@ -135,6 +650,37 @@
 		<element idref="e.rbracket" />
 		<element pattern="(" highlight="paren" />
 		<element pattern=")" ends_context="1" highlight="paren" />
+		<!-- Import math keywords -->
+		<element idref="abs" />
+		<element idref="acos" />
+		<element idref="asin" />
+		<element idref="atan" />
+		<element idref="atan2" />
+		<element idref="ceil" />
+		<element idref="cos" />
+		<element idref="exp" />
+		<element idref="floor" />
+		<element idref="ln" />
+		<element idref="log" />
+		<element idref="sqrt" />
+		<element idref="tan" />
+		<element idref="sin" />
+		<element idref="sign" />
+		<element idref="round" />
+		<element idref="rands" />
+		<element idref="pow" />
+		<element idref="min" />
+		<element idref="max" />
+		<element idref="str" />
+		<element idref="len" />
+		<element idref="concat" />
+		<element idref="chr" />
+		<element idref="search" />
+		<element idref="version" />
+		<element idref="version_num" />
+		<element idref="norm" />
+		<element idref="cross" />
+		<element idref="parent_module" />
 	</context>
 </element>
 
@@ -160,6 +706,37 @@
 		<element idref="string" />
 		<element pattern="(" highlight="paren" />
 		<element pattern=")" ends_context="1" highlight="paren" />
+		<!-- Import math keywords -->
+		<element idref="abs" />
+		<element idref="acos" />
+		<element idref="asin" />
+		<element idref="atan" />
+		<element idref="atan2" />
+		<element idref="ceil" />
+		<element idref="cos" />
+		<element idref="exp" />
+		<element idref="floor" />
+		<element idref="ln" />
+		<element idref="log" />
+		<element idref="sqrt" />
+		<element idref="tan" />
+		<element idref="sin" />
+		<element idref="sign" />
+		<element idref="round" />
+		<element idref="rands" />
+		<element idref="pow" />
+		<element idref="min" />
+		<element idref="max" />
+		<element idref="str" />
+		<element idref="len" />
+		<element idref="concat" />
+		<element idref="chr" />
+		<element idref="search" />
+		<element idref="version" />
+		<element idref="version_num" />
+		<element idref="norm" />
+		<element idref="cross" />
+		<element idref="parent_module" />
 	</context>
 </element>
 
@@ -183,6 +760,37 @@
 		<element idref="e.rbracket" />
 		<element pattern="(" highlight="paren" />
 		<element pattern=")" ends_context="1" highlight="paren" />
+		<!-- Import math keywords -->
+		<element idref="abs" />
+		<element idref="acos" />
+		<element idref="asin" />
+		<element idref="atan" />
+		<element idref="atan2" />
+		<element idref="ceil" />
+		<element idref="cos" />
+		<element idref="exp" />
+		<element idref="floor" />
+		<element idref="ln" />
+		<element idref="log" />
+		<element idref="sqrt" />
+		<element idref="tan" />
+		<element idref="sin" />
+		<element idref="sign" />
+		<element idref="round" />
+		<element idref="rands" />
+		<element idref="pow" />
+		<element idref="min" />
+		<element idref="max" />
+		<element idref="str" />
+		<element idref="len" />
+		<element idref="concat" />
+		<element idref="chr" />
+		<element idref="search" />
+		<element idref="version" />
+		<element idref="version_num" />
+		<element idref="norm" />
+		<element idref="cross" />
+		<element idref="parent_module" />
 	</context>
 </element>
 
@@ -239,6 +847,37 @@
 		<element idref="string" />
 		<element pattern="(" highlight="paren" />
 		<element pattern=")" ends_context="1" highlight="paren" />
+		<!-- Import math keywords -->
+		<element idref="abs" />
+		<element idref="acos" />
+		<element idref="asin" />
+		<element idref="atan" />
+		<element idref="atan2" />
+		<element idref="ceil" />
+		<element idref="cos" />
+		<element idref="exp" />
+		<element idref="floor" />
+		<element idref="ln" />
+		<element idref="log" />
+		<element idref="sqrt" />
+		<element idref="tan" />
+		<element idref="sin" />
+		<element idref="sign" />
+		<element idref="round" />
+		<element idref="rands" />
+		<element idref="pow" />
+		<element idref="min" />
+		<element idref="max" />
+		<element idref="str" />
+		<element idref="len" />
+		<element idref="concat" />
+		<element idref="chr" />
+		<element idref="search" />
+		<element idref="version" />
+		<element idref="version_num" />
+		<element idref="norm" />
+		<element idref="cross" />
+		<element idref="parent_module" />
 	</context>
 </element>
 <!-- 3d Shapes-->
@@ -260,13 +899,40 @@
 		</group>
 		<element idref="num"  />
 		<element idref="dec" />
-		<!--<element idref="true" />
-		<element idref="false" />-->
 		<element idref="string" />
-		<!--<element idref="e.lbracket" />
-		<element idref="e.rbracket" />-->
 		<element pattern="(" highlight="paren" />
 		<element pattern=")" ends_context="1" highlight="paren" />
+		<!-- Import math keywords -->
+		<element idref="abs" />
+		<element idref="acos" />
+		<element idref="asin" />
+		<element idref="atan" />
+		<element idref="atan2" />
+		<element idref="ceil" />
+		<element idref="cos" />
+		<element idref="exp" />
+		<element idref="floor" />
+		<element idref="ln" />
+		<element idref="log" />
+		<element idref="sqrt" />
+		<element idref="tan" />
+		<element idref="sin" />
+		<element idref="sign" />
+		<element idref="round" />
+		<element idref="rands" />
+		<element idref="pow" />
+		<element idref="min" />
+		<element idref="max" />
+		<element idref="str" />
+		<element idref="len" />
+		<element idref="concat" />
+		<element idref="chr" />
+		<element idref="search" />
+		<element idref="version" />
+		<element idref="version_num" />
+		<element idref="norm" />
+		<element idref="cross" />
+		<element idref="parent_module" />
 	</context>
 </element>
 <element pattern="cube" highlight="primitive" >
@@ -287,6 +953,37 @@
 		<element idref="e.rbracket" />
 		<element pattern="(" highlight="paren" />
 		<element pattern=")" ends_context="1" highlight="paren" />
+		<!-- Import math keywords -->
+		<element idref="abs" />
+		<element idref="acos" />
+		<element idref="asin" />
+		<element idref="atan" />
+		<element idref="atan2" />
+		<element idref="ceil" />
+		<element idref="cos" />
+		<element idref="exp" />
+		<element idref="floor" />
+		<element idref="ln" />
+		<element idref="log" />
+		<element idref="sqrt" />
+		<element idref="tan" />
+		<element idref="sin" />
+		<element idref="sign" />
+		<element idref="round" />
+		<element idref="rands" />
+		<element idref="pow" />
+		<element idref="min" />
+		<element idref="max" />
+		<element idref="str" />
+		<element idref="len" />
+		<element idref="concat" />
+		<element idref="chr" />
+		<element idref="search" />
+		<element idref="version" />
+		<element idref="version_num" />
+		<element idref="norm" />
+		<element idref="cross" />
+		<element idref="parent_module" />
 	</context>
 </element>
 <element pattern="cylinder" highlight="primitive" >
@@ -319,6 +1016,37 @@
 		<element idref="e.rbracket" />
 		<element pattern="(" highlight="paren" />
 		<element pattern=")" ends_context="1" highlight="paren" />
+		<!-- Import math keywords -->
+		<element idref="abs" />
+		<element idref="acos" />
+		<element idref="asin" />
+		<element idref="atan" />
+		<element idref="atan2" />
+		<element idref="ceil" />
+		<element idref="cos" />
+		<element idref="exp" />
+		<element idref="floor" />
+		<element idref="ln" />
+		<element idref="log" />
+		<element idref="sqrt" />
+		<element idref="tan" />
+		<element idref="sin" />
+		<element idref="sign" />
+		<element idref="round" />
+		<element idref="rands" />
+		<element idref="pow" />
+		<element idref="min" />
+		<element idref="max" />
+		<element idref="str" />
+		<element idref="len" />
+		<element idref="concat" />
+		<element idref="chr" />
+		<element idref="search" />
+		<element idref="version" />
+		<element idref="version_num" />
+		<element idref="norm" />
+		<element idref="cross" />
+		<element idref="parent_module" />
 	</context>
 </element>
 
@@ -342,6 +1070,37 @@
 		<element idref="e.rbracket" />
 		<element pattern="(" highlight="paren" />
 		<element pattern=")" ends_context="1" highlight="paren" />
+		<!-- Import math keywords -->
+		<element idref="abs" />
+		<element idref="acos" />
+		<element idref="asin" />
+		<element idref="atan" />
+		<element idref="atan2" />
+		<element idref="ceil" />
+		<element idref="cos" />
+		<element idref="exp" />
+		<element idref="floor" />
+		<element idref="ln" />
+		<element idref="log" />
+		<element idref="sqrt" />
+		<element idref="tan" />
+		<element idref="sin" />
+		<element idref="sign" />
+		<element idref="round" />
+		<element idref="rands" />
+		<element idref="pow" />
+		<element idref="min" />
+		<element idref="max" />
+		<element idref="str" />
+		<element idref="len" />
+		<element idref="concat" />
+		<element idref="chr" />
+		<element idref="search" />
+		<element idref="version" />
+		<element idref="version_num" />
+		<element idref="norm" />
+		<element idref="cross" />
+		<element idref="parent_module" />
 	</context>
 </element>
 </group>
@@ -358,6 +1117,37 @@
 			<element idref="e.rbracket" />
 			<element pattern="(" highlight="paren" />
 			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
 		</context>
 	</element>
 	<element pattern="else">
@@ -375,6 +1165,37 @@
 			<element idref="e.rbracket" />
 			<element pattern="(" highlight="paren" />
 			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
 		</context>
 	</element>
 	<element pattern="intersection_for">
@@ -388,6 +1209,37 @@
 			<element idref="e.rbracket" />
 			<element pattern="(" highlight="paren" />
 			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
 		</context>
 	</element>
 	<element pattern="lookup">
@@ -402,6 +1254,37 @@
 			<element idref="e.rbracket" />
 			<element pattern="(" highlight="paren" />
 			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
 		</context>
 	</element>
 	<element pattern="echo">
@@ -467,39 +1350,536 @@
 	<autocomplete notclass="append_braces" append="()" backup_cursor="1" />
 <!-- Transforms -->
 	<element pattern="translate">
-	
+		<reference>Translates (moves) its child elements along the specified vector. The parameter is a vector.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
+		</context>
 	</element>
 	<element pattern="rotate">
-	
+		<reference>Rotates its child 'a' degrees about the axis of the coordinate system or around an arbitrary axis.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
+		</context>
 	</element>
 	<element pattern="scale">
-	
+		<reference>Scales its child elements using the specified vector.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
+		</context>
 	</element>
 	<element pattern="resize">
-	
+		<reference>Modifies the size of the child object to match the given x,y, and z.</reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element pattern="auto">
+				<reference>True or false. If set to true, it will auto-scale any 0-dimensions to match</reference>
+				<autocomplete enable="1" />
+			</element>
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
+		</context>
 	</element>
 	<element pattern="mirror">
-	
+		<reference>Mirrors the child element on a plane through the origin. The argument to mirror() is the normal vector of a plane intersecting the origin through which to mirror the object. </reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
+		</context>
 	</element>
 	<element pattern="offset">
+		<reference></reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<!-- TODO add parameters r,delta,chamfer -->
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
+		</context>
 	
 	</element>
 	<element pattern="multimatrix">
+		<reference></reference>
+		<!-- TODO add parameter m -->
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
+		</context>
 	
 	</element>
 	<element pattern="color">
+		<reference></reference>
+		<!-- TODO add parameters colorname, alpha -->
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
+		</context>
 	
 	</element>
 	<element pattern="linear_extrude">
+		<reference></reference>
+		<!-- TODO add parameters height, center,convexity,twist,slices,scale -->
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
+		</context>
 	
 	</element>
 	<element pattern="rotate_extrude">
+		<reference></reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+		<!-- TODO add parameters angle, convexity -->
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
+		</context>
 	
 	</element>
 	<element pattern="projection">
+		<reference></reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+		<!-- TODO add parameter cut -->
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
+		</context>
 	
 	</element>
 	<element pattern="children">
+		<reference></reference>
+		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element idref="num"  />
+			<element idref="dec" />
+			<element idref="string" />
+			<element idref="e.lbracket" />
+			<element idref="e.rbracket" />
+			<element pattern="(" highlight="paren" />
+			<element pattern=")" ends_context="1" highlight="paren" />
+			<!-- Import math keywords -->
+			<element idref="abs" />
+			<element idref="acos" />
+			<element idref="asin" />
+			<element idref="atan" />
+			<element idref="atan2" />
+			<element idref="ceil" />
+			<element idref="cos" />
+			<element idref="exp" />
+			<element idref="floor" />
+			<element idref="ln" />
+			<element idref="log" />
+			<element idref="sqrt" />
+			<element idref="tan" />
+			<element idref="sin" />
+			<element idref="sign" />
+			<element idref="round" />
+			<element idref="rands" />
+			<element idref="pow" />
+			<element idref="min" />
+			<element idref="max" />
+			<element idref="str" />
+			<element idref="len" />
+			<element idref="concat" />
+			<element idref="chr" />
+			<element idref="search" />
+			<element idref="version" />
+			<element idref="version_num" />
+			<element idref="norm" />
+			<element idref="cross" />
+			<element idref="parent_module" />
+		</context>
 	
 	</element>
 </group>
@@ -508,50 +1888,11 @@
 	<autocomplete notclass="append_braces" append="()" />
 	
 	<element pattern="hull">
-	
+		<reference></reference>
 	</element>
 	<element pattern="minkowski">
-	
+		<reference></reference>
 	</element>
-</group>
-
-<group  highlight="math">
-	<autocomplete enable="1" append="()" backup_cursor="1" />
-<!-- Math -->
-	<element pattern="abs"></element>
-	<element pattern="acos"></element>
-	<element pattern="asin"></element>
-	<element pattern="atan"></element>
-	<element pattern="atan2"></element>
-	<element pattern="ceil"></element>
-	<element pattern="cos"></element>
-	<element pattern="exp"></element>
-	<element pattern="floor"></element>
-	<element pattern="ln"></element>
-	<element pattern="log"></element>
-	<element pattern="sqrt"></element>
-	<element pattern="tan"></element>
-	<element pattern="sin"></element>
-	<element pattern="sign"></element>
-	<element pattern="round"></element>
-	<element pattern="rands"></element>
-	<element pattern="pow"></element>
-	<element pattern="min"></element>
-	<element pattern="max"></element>
-	<element pattern="str"></element>
-	<element pattern="len"></element>
-</group>
-
-<group highlight="func">
-	<autocomplete enable="1" append="()" backup_cursor="1" />
-	<element pattern="concat"></element>
-	<element pattern="chr"></element>
-	<element pattern="search"></element>
-	<element pattern="version"></element>
-	<element pattern="version_num"></element>
-	<element pattern="norm"></element>
-	<element pattern="cross"></element>
-	<element pattern="parent_module"></element>
 </group>
 
 <group highlight="definition">
@@ -623,10 +1964,18 @@
 	<autocomplete class="append_braces" append="() {}" backup_cursor="1" />
 	<autocomplete notclass="append_braces" append="()" />
 <!-- joins -->
-	<element pattern="difference"></element>
-	<element pattern="union"></element>
-	<element pattern="intersection"></element>
-	<element pattern="render"></element>
+	<element pattern="difference">
+		<reference></reference>
+	</element>
+	<element pattern="union">
+		<reference></reference>
+	</element>
+	<element pattern="intersection">
+		<reference></reference>
+	</element>
+	<element pattern="render">
+		<reference></reference>
+	</element>
 </group>
 
 <element id="pod" pattern="=[a-zA-Z][a-zA-Z0-9 _]*[&#10;&#13;]" is_regex="1" starts_block="1" mayfold="1" highlight="comment" />
@@ -634,8 +1983,10 @@
 
 <element pattern="//[^&#10;&#13;]*" is_regex="1" highlight="comment" />
 <element pattern="#[^&#10;&#13;]*" is_regex="1" highlight="highlight"><reference>Highlight in preview</reference></element>
-<element pattern="[&#9;&#10;&#13;][ ]*\*[^&#10;&#13;]*" is_regex="1" highlight="disable"><reference>Disable in preview/render</reference></element>
-<element pattern="![^&#10;&#13;]*" is_regex="1" highlight="only"><reference>Render only this</reference></element>
+<element pattern="[&#13;]+[&#32;]*\*[^&#10;&#13;]*" is_regex="1" highlight="disable"><reference>Disable in preview/render</reference></element>
+<element pattern="[&#9;]+[&#32;]*\*[^&#10;&#13;]*" is_regex="1" highlight="disable"><reference>Disable in preview/render</reference></element>
+<element pattern="[&#10;]+[&#32;]*\*[^&#10;&#13;]*" is_regex="1" highlight="disable"><reference>Disable in preview/render</reference></element>
+<element pattern="[&#9;&#10;&#13;]+[&#32;]*![^&#10;&#13;]*" is_regex="1" highlight="only"><reference>Render only this</reference></element>
 <element pattern="%[^&#10;&#13;]*" is_regex="1" highlight="transparent"><reference>Transparent in preview</reference></element>
 
 </context>
