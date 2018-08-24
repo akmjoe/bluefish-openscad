@@ -597,7 +597,7 @@
 	</context>
 </element>
 <element pattern="cube" highlight="primitive" >
-	<reference><b>Create a (3d) cube.&#13;Params:</b> size, center(<i>boolean</i>)&#13;<b>Alt. Params:</b> size, center</reference>
+	<reference><b>Create a (3d) cube.&#13;Params:</b> size, center(<i>boolean</i>)</reference>
 	<autocomplete class="append_semicolon" append="();" backup_cursor="2" />
 	<autocomplete notclass="append_semicolon" append="()" backup_cursor="1" />
 	<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
@@ -721,7 +721,7 @@
 			<element idref="center" />
 			<element pattern="points"><reference>Vector of 3d points or vertices. Each point is in turn a vector, [<i>x,y,z</i>], of its coordinates.</reference></element>
 			<element pattern="faces"><reference>Vector of faces which collectively enclose the solid. Each face is a vector containing the indices (0 based) of 3 or more points from the points vector.</reference></element>
-			<element pattern="convexity"><reference>Integer. The convexity parameter specifies the maximum number of faces a ray intersecting the object might penetrate. This parameter is only needed for correctly displaying the object in OpenCSG preview mode. It has no effect on the polyhedron rendering. For display problems, setting it to 10 should work fine for most cases. Default 1</reference></element>
+			<element id="convexity" pattern="convexity"><reference>Integer. The convexity parameter specifies the maximum number of faces a ray intersecting the object might penetrate. This parameter is only needed for correctly displaying the object in OpenCSG preview mode. It has no effect on the polyhedron rendering. For display problems, setting it to 10 should work fine for most cases. Default 1</reference></element>
 			
 		</group>
 		<element idref="num"  />
@@ -977,32 +977,29 @@
 		<reference>Time variable in animation</reference>
 	</element>
 	<element pattern="$vpr">
-		<reference>
-			<b>$vpr, $vpt, $vpd</b> contain the current viewport rotation and translation and camera distance - at the time of doing the rendering.
-			Moving the viewport does not update them. During an animation they are updated for each frame.&#13;
-		   <i>$vpr</i> shows rotation&#13;
-		   <i>$vpt</i> shows translation (i.e. won't be affected by rotate and zoom)&#13;
-		   <i>$vpd</i> shows the camera distance&#13;
+		<reference><b>$vpr, $vpt, $vpd</b> contain the current viewport rotation and translation and camera distance - at the time of doing the rendering.
+Moving the viewport does not update them. During an animation they are updated for each frame.&#13;
+<i>$vpr</i> shows rotation&#13;
+<i>$vpt</i> shows translation (i.e. won't be affected by rotate and zoom)&#13;
+<i>$vpd</i> shows the camera distance&#13;
       </reference>
 	</element>
 	<element pattern="$vpt">
-		<reference>
-			<b>$vpr, $vpt, $vpd</b> contain the current viewport rotation and translation and camera distance - at the time of doing the rendering.
-			Moving the viewport does not update them. During an animation they are updated for each frame.&#13;
-		   <i>$vpr</i> shows rotation&#13;
-		   <i>$vpt</i> shows translation (i.e. won't be affected by rotate and zoom)&#13;
-		   <i>$vpd</i> shows the camera distance&#13;</reference>
+		<reference><b>$vpr, $vpt, $vpd</b> contain the current viewport rotation and translation and camera distance - at the time of doing the rendering.
+Moving the viewport does not update them. During an animation they are updated for each frame.&#13;
+<i>$vpr</i> shows rotation&#13;
+<i>$vpt</i> shows translation (i.e. won't be affected by rotate and zoom)&#13;
+<i>$vpd</i> shows the camera distance&#13;</reference>
 	</element>
 	<element pattern="$vpd">
-		<reference>
-			<b>$vpr, $vpt, $vpd</b> contain the current viewport rotation and translation and camera distance - at the time of doing the rendering.
-			Moving the viewport does not update them. During an animation they are updated for each frame.&#13;
-		   <i>$vpr</i> shows rotation&#13;
-		   <i>$vpt</i> shows translation (i.e. won't be affected by rotate and zoom)&#13;
-		   <i>$vpd</i> shows the camera distance&#13;</reference>
+		<reference><b>$vpr, $vpt, $vpd</b> contain the current viewport rotation and translation and camera distance - at the time of doing the rendering.
+Moving the viewport does not update them. During an animation they are updated for each frame.&#13;
+<i>$vpr</i> shows rotation&#13;
+<i>$vpt</i> shows translation (i.e. won't be affected by rotate and zoom)&#13;
+<i>$vpd</i> shows the camera distance&#13;</reference>
 	</element>
 	<element pattern="$children">
-		<reference></reference>
+		<reference>The total number of children in the module instance. Individual children are accesssed by calling <b>children(</b><i>index</i><b>)</b></reference>
 	</element>
 </group>
 
@@ -1142,7 +1139,7 @@
 	<element pattern="resize">
 		<reference>Modifies the size of the child object to match the given x,y, and z.</reference>
 		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
-			<element pattern="auto">
+			<element pattern="auto" highlight="attribute">
 				<reference>True or false. If set to true, it will auto-scale any 0-dimensions to match</reference>
 				<autocomplete enable="1" />
 			</element>
@@ -1230,9 +1227,26 @@
 		</context>
 	</element>
 	<element pattern="offset">
-		<reference></reference>
+		<reference>Offset allows moving 2D outlines outward or inward by a given amount. Parameters: r | delta, chamfer</reference>
 		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
-			<!-- TODO add parameters r,delta,chamfer -->
+			<group highlight="attribute">
+				<element pattern="r">
+					<reference>Offset amount, with radius.&#13;If positive, offsets outside and rounds outside corners.&#13;If negative, offsets inside and rounds inside corners.</reference>
+					<autocomplete enable="1" />
+				</element>
+				<element pattern="delta">
+					<reference>Offset amount. See also <b>r</b> (offset with radius)&#13;If positive, offsets outside.&#13;If negative, offsets inside.</reference>
+					<autocomplete enable="1" />
+				</element>
+				<element pattern="chamfer">
+					<reference>Boolean. (default false) When using the delta parameter, this flag defines if edges should be chamfered (cut off with a straight line) or not (extended to their intersection).</reference>
+					<autocomplete enable="1" />
+					<context symbols=" \=),">
+						<element pattern="true" highlight="boolean" ends_context="1"><autocomplete enable="1" /></element>
+						<element pattern="false" highlight="boolean" ends_context="1"><autocomplete enable="1" /></element>
+					</context>
+				</element>
+			</group>
 			<element idref="num"  />
 			<element idref="dec" />
 			<element idref="string" />
@@ -1275,9 +1289,17 @@
 	
 	</element>
 	<element pattern="multimatrix">
-		<reference></reference>
-		<!-- TODO add parameter m -->
+		<reference>Multiplies the geometry of all child elements with the given 4x4 transformation matrix.</reference>
 		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<element pattern="m" highlight="attribute">
+				<reference>Matrix of 4 x 4 vectors. This is a breakdown of what you can do with the independent elements in the matrix (for the first three rows):&#13;
+<i>[Scale X]	[Scale X sheared along Y]	[Scale X sheared along Z]	[Translate X]&#13;
+[Scale Y sheared along X]	[Scale Y]	[Scale Y sheared along Z]	[Translate Y]&#13;
+[Scale Z sheared along X]	[Scale Z sheared along Y]	[Scale Z]	[Translate Z]</i>&#13;
+The fourth row is used in 3D environments to define a view of the object. It is not used in OpenSCAD and should be [0,0,0,1] 
+				</reference>
+				<autocomplete enable="1" />
+			</element>
 			<element idref="num"  />
 			<element idref="dec" />
 			<element idref="string" />
@@ -1320,9 +1342,18 @@
 	
 	</element>
 	<element pattern="color">
-		<reference></reference>
-		<!-- TODO add parameters colorname, alpha -->
+		<reference>Displays the child elements using the specified RGB color + alpha value. This is only used for the F5 preview as CGAL and STL (F6) do not currently support color. The alpha value will default to 1.0 (opaque) if not specified. </reference>
 		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<group highlight="attribute">
+				<element pattern="c">
+					<reference>Color parameter. Can be a colorname, or vector of r,g,b,[a] as floating point (0-1).</reference>
+					<autocomplete enable="1" />
+				</element>
+				<element pattern="alpha">
+					<reference>Alpha transparency.</reference>
+					<autocomplete enable="1" />
+				</element>
+			</group>
 			<element idref="num"  />
 			<element idref="dec" />
 			<element idref="string" />
@@ -1365,9 +1396,37 @@
 	
 	</element>
 	<element pattern="linear_extrude">
-		<reference></reference>
-		<!-- TODO add parameters height, center,convexity,twist,slices,scale -->
+		<reference>Linear Extrusion is a modeling operation that takes a 2D polygon as input and extends it in the third dimension. This way a 3D shape is created. Keep in mind that extrusion is always performed from XY plane to the height indicate along Z axis; so if you rotate or apply other transformations before extrusion, the extrusion is applied to the projection of the 2D polygon to the XY plane.</reference>
 		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
+			<group highlight="attribute">
+				<element pattern="height">
+					<reference>Z axis height after extrusion. Must be positive.</reference>
+					<autocomplete enable="1" />
+				</element>
+				<element idref="center" />
+				<element pattern="convexity">
+					<reference></reference>
+					<autocomplete enable="1" />
+				</element>
+				<element pattern="twist">
+					<reference>Twist is the number of degrees of through which the shape is extruded. Setting the parameter twist = 360 will extrude through one revolution. The twist direction follows the left hand rule.</reference>
+					<autocomplete enable="1" />
+				</element>
+				<element pattern="slices">
+					<reference>Defines the number of intermediate points along the Z axis of the extrusion. Its default increases with the value of twist.&#13; Alternatively can use <b>$fn</b>, <b>$fs</b> or <b>$fa</b>.</reference>
+					<autocomplete enable="1" />
+				</element>
+				<element pattern="scale">
+					<reference>Scales the 2D shape by this value over the height of the extrusion. Scale can be a scalar or a vector. If a vector, the first number is x scale, second is y scale.</reference>
+					<autocomplete enable="1" />
+				</element>
+			</group>
+			<group highlight="special-variable">
+				<autocomplete enable="1" />
+				<element pattern="$fn"><reference>Number of segments</reference></element>
+				<element pattern="$fs"><reference>Segment size (in default units)</reference></element>
+				<element pattern="$fa"><reference>Segment Angle (in degrees)</reference></element>
+			</group>
 			<element idref="num"  />
 			<element idref="dec" />
 			<element idref="string" />
@@ -1410,9 +1469,21 @@
 	
 	</element>
 	<element pattern="rotate_extrude">
-		<reference></reference>
+		<reference>Rotational extrusion spins a 2D shape around the Z-axis to form a solid which has rotational symmetry. One way to think of this operation is to imagine a Potter's wheel placed on the X-Y plane with its axis of rotation pointing up towards +Z. Then place the to-be-made object on this virtual Potter's wheel (possibly extended down below the X-Y plane towards -Z, take the cross-section of this object on the X-Z plane but keep only the right half (X >= 0). That is the 2D shape that need to be fed to rotate_extrude() as the child in order to generate this solid. </reference>
 		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
-		<!-- TODO add parameters angle, convexity -->
+			<group highlight="attribute">
+				<element pattern="angle">
+					<reference>The number of degrees to sweep, starting at the positive X axis. Default 360.&#13;The direction of the sweep follows the Right Hand Rule, hence a negative angle will sweep clockwise.</reference>
+					<autocomplete enable="1" />
+				</element>
+				<element idref="convexity" />
+			</group>
+			<group highlight="special-variable">
+				<autocomplete enable="1" />
+				<element pattern="$fn"><reference>Number of segments</reference></element>
+				<element pattern="$fs"><reference>Segment size (in default units)</reference></element>
+				<element pattern="$fa"><reference>Segment Angle (in degrees)</reference></element>
+			</group>
 			<element idref="num"  />
 			<element idref="dec" />
 			<element idref="string" />
@@ -1455,9 +1526,18 @@
 	
 	</element>
 	<element pattern="projection">
-		<reference></reference>
+		<reference>Using this function, you can create 2d drawings from 3d models, and export them to the dxf format. It works by projecting a 3D model to the (x,y) plane, with z at 0. If <i>cut</i>=true, only points with z=0 will be considered (effectively cutting the object), with <i>cut</i>=false(the default), points above and below the plane will be considered as well (creating a proper projection). </reference>
 		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
-		<!-- TODO add parameter cut -->
+			<group highlight="attribute">
+				<element pattern="cut">
+					<reference> If true, only points with z=0 will be considered (effectively cutting the object)&#13;If false(the default), points above and below the plane will be considered as well (creating a proper projection)</reference>
+					<autocomplete enable="1" />
+					<context symbols=" \=),">
+						<element pattern="true" highlight="boolean" ends_context="1"><autocomplete enable="1" /></element>
+						<element pattern="false" highlight="boolean" ends_context="1"><autocomplete enable="1" /></element>
+					</context>
+				</element>
+			</group>
 			<element idref="num"  />
 			<element idref="dec" />
 			<element idref="string" />
@@ -1500,7 +1580,11 @@
 	
 	</element>
 	<element pattern="children">
-		<reference></reference>
+		<autocomplete append="()" backup_cursor="1" />
+		<reference>Use of children() allows modules to act as operators applied to any or all of the objects within this module instantiation.&#13;
+Objects are indexed via integers from 0 to $children-1. OpenSCAD sets $children to the total number of objects within the scope. Objects grouped into a sub scope are treated as one child.&#13;
+If called without a parameter, returns all children. Also can be called with the index of the desired child. 
+		</reference>
 		<context symbols="([],\=&#10;&#13;:\*\+\-\/ )">
 			<element idref="num"  />
 			<element idref="dec" />
@@ -1549,10 +1633,10 @@
 	<autocomplete notclass="append_braces" append="()" />
 	
 	<element pattern="hull">
-		<reference></reference>
+		<reference>Displays the convex hull of child nodes. Basically this connects the outermost points of all its children.</reference>
 	</element>
 	<element pattern="minkowski">
-		<reference></reference>
+		<reference>Displays the minkowski sum of child nodes. Think of it as translating the second object to the corners of the first, and performing a hull.</reference>
 	</element>
 </group>
 
@@ -1626,16 +1710,23 @@
 	<autocomplete notclass="append_braces" append="()" />
 <!-- joins -->
 	<element pattern="difference">
-		<reference></reference>
+		<reference>Subtracts the 2nd (and all further) child nodes from the first one (logical and not).&#13;
+May be used with either 2D or 3D objects, but don't mix them.
+		</reference>
 	</element>
 	<element pattern="union">
-		<reference></reference>
+		<reference>Creates a union of all its child nodes. This is the sum of all children (logical or).&#13;
+May be used with either 2D or 3D objects, but don't mix them.
+		</reference>
 	</element>
 	<element pattern="intersection">
-		<reference></reference>
+		<reference>Creates the intersection of all child nodes. This keeps the overlapping portion (logical and).&#13;
+Only the area which is common or shared by all children is retained.&#13;
+May be used with either 2D or 3D objects, but don't mix them.
+		</reference>
 	</element>
 	<element pattern="render">
-		<reference></reference>
+		<reference>Forces the generation of a mesh even in preview mode. Useful when the boolean operations become too slow to track. </reference>
 	</element>
 </group>
 
