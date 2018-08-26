@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 		Bluefish HTML Editor
-		openSCAD.bflang2 $Revision: 1 $
+		openSCAD.bflang2 $Revision: 2 $
 		
 		@author akmjoe
 
@@ -1628,7 +1628,7 @@ If called without a parameter, returns all children. Also can be called with the
 	
 	</element>
 </group>
-<group highlight="transform">
+<group highlight="join">
 	<autocomplete class="append_braces" append="() {}" backup_cursor="1" />
 	<autocomplete notclass="append_braces" append="()" />
 	

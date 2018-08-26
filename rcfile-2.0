@@ -1,0 +1,156 @@
+delay_full_scan: 1
+autocomp_accel_string: <Control>space
+num_undo_levels: 100
+autosave_file_prefix:
+editor_auto_close_brackets: 2
+cursor_highlight_color: #FFFF33
+load_reference: 1
+allow_the_use_of_font: 0
+block_folding_mode: 1
+tab_color_modified: #0000FF
+plugin_config: /usr/lib/bluefish/entities.so:1:Convert Entities:
+plugin_config: /usr/lib/bluefish/zencoding.so:0:zencoding:
+plugin_config: /usr/lib/bluefish/charmap.so:1:Character Map:
+plugin_config: /usr/lib/bluefish/about.so:1:About Dialog:
+plugin_config: /usr/lib/bluefish/snippets.so:1:Code Snippets:
+plugin_config: /usr/lib/bluefish/infbrowser.so:1:Info Browser:
+plugin_config: /usr/lib/bluefish/htmlbar.so:0:HTML Features:
+encoding_search_Nbytes: 2048
+auto_update_meta_author: 1
+editor_smart_cursor: 1
+tab_color_error: #FF0000
+tab_color_loading: #C7C7C7
+textstyles3: special-warning::#FF0000:::0:
+textstyles3: warning:#FF0000::1:0:0:
+textstyles3: brackets:#ffffffffffff::1:0:0:
+textstyles3: special-attribute:#FF0000::::0:
+textstyles3: attribute:#e9e9b9b96e6e::1:0:0:
+textstyles3: special-tag3:#FF9900::1::0:
+textstyles3: special-tag2:#8a8ae2e23434::1::0:
+textstyles3: special-tag:#e9e9b9b96e6e::1::0:
+textstyles3: tag:#adad7f7fa8a8::1::0:
+textstyles3: operator:#C86400::0:0:0:
+textstyles3: variable:#990000::1:0:0:
+textstyles3: special-value:#0000FF::1::0:
+textstyles3: value:#0000FF::0:0:1:
+textstyles3: special-keyword:#ffff00000000::1:1:0:
+textstyles3: keyword:#fcfce9e94f4f::1:0:0:
+textstyles3: special-function:#efef29292929::::0:
+textstyles3: function:#8a8ae2e23434::0:0:0:
+textstyles3: special-type:#990000::1::0:
+textstyles3: type:::1:0:0:
+textstyles3: special-string3:#999900::0:0:1:
+textstyles3: special-string2:#00D000::0:0:1:
+textstyles3: special-string:#005400::0:0:1:
+textstyles3: string-no-spell-check:#009900::0:0:0:
+textstyles3: string:#009900::0:0:1:
+textstyles3: comment:#bababdbdb6b6::0:1:1:
+textstyles3: preprocessor:#aaaa00::0:0:0:
+textstyles3: blockmatch:#FFFFFF:#4e4e9a9a0606:0:0:0:
+textstyles3: searchresult:#000000:#FFFF57:0:0:0:
+textstyles3: foldheader::#99FF99:0:0:0:
+newfile_default_encoding: UTF-8
+bflang_options: OpenSCAD:C style comment_foldable:1:
+bflang_options: OpenSCAD:Curly brackets block_foldable:1:
+bflang_options: OpenSCAD:Parentheses block_foldable:0:
+bflang_options: OpenSCAD:Square brackets block_foldable:0:
+bflang_options: OpenSCAD:append_braces:1:
+bflang_options: OpenSCAD:append_semicolon:1:
+bflang_options: OpenSCAD:load_completion:1:
+bflang_options: OpenSCAD:load_reference:1:
+bflang_options: OpenSCAD:show_in_menu:1:
+auto_update_meta_date: 1
+format_by_context: 1
+strip_trailing_spaces_on_save: 0
+cursor_color: #FCAF3E
+selection_color: #5C3566
+right_margin: #990000
+max_dir_history: 10
+cline_bg: #F3F3F3
+smartindent: 1
+highlight_styles: OpenSCAD:attribute:attribute:
+highlight_styles: OpenSCAD:boolean:special-tag3:
+highlight_styles: OpenSCAD:brackets:brackets:
+highlight_styles: OpenSCAD:built-in-function:function:
+highlight_styles: OpenSCAD:comment:comment:
+highlight_styles: OpenSCAD:definition:special-tag:
+highlight_styles: OpenSCAD:disable:comment:
+highlight_styles: OpenSCAD:func:special-keyword:
+highlight_styles: OpenSCAD:function:special-function:
+highlight_styles: OpenSCAD:highlight:preprocessor:
+highlight_styles: OpenSCAD:import:special-tag2:
+highlight_styles: OpenSCAD:join:tag:
+highlight_styles: OpenSCAD:keyword:keyword:
+highlight_styles: OpenSCAD:math:special-keyword:
+highlight_styles: OpenSCAD:only:special-warning:
+highlight_styles: OpenSCAD:operator:operator:
+highlight_styles: OpenSCAD:paren:special-tag3:
+highlight_styles: OpenSCAD:pointer:special-value:
+highlight_styles: OpenSCAD:pragma:preprocessor:
+highlight_styles: OpenSCAD:primitive:function:
+highlight_styles: OpenSCAD:special-variable:special-attribute:
+highlight_styles: OpenSCAD:special_keyword:special-keyword:
+highlight_styles: OpenSCAD:string:string:
+highlight_styles: OpenSCAD:transform:special-function:
+highlight_styles: OpenSCAD:transparent:warning:
+highlight_styles: OpenSCAD:user_function:special-keyword:
+highlight_styles: OpenSCAD:value:value:
+highlight_styles: OpenSCAD:variable:variable:
+highlight_styles: OpenSCAD:warning:warning:
+open_in_running_bluefish: 1
+left_panel_left: 1
+show_autocomp_reference: 1
+visible_ws: #FF0000
+editor_fg: #FFFFFF
+register_recent_mode: 2
+visible_ws_mode: 3
+show_long_line_warning: 1
+editor_tab_indent_sel: 0
+autosave_time: 60
+reduce_scan_triggers: 0
+show_tooltip_reference: 1
+adv_textview_right_margin: 1
+recent_means_recently_closed: 1
+image_thumbnailstring: _thumbnail
+autosave_location_mode: 0
+use_system_colors: 0
+max_shown_filename_len: 0
+right_margin_pos: 80
+highlight_cursor: 0
+auto_update_meta_generator: 1
+use_system_tab_font: 1
+wrap_on_right_margin: 0
+hide_bars_on_fullscreen: 1
+image_thumbnailtype: jpeg
+open_in_new_window: 1
+autosave_file_suffix: #
+clear_undo_on_save: 0
+max_recent_files: 15
+leave_to_window_manager: 0
+editor_bg: #000000
+editor_replace_unicode_quotes: 0
+modified_check_type: 1
+backup_cleanuponclose: 0
+leftpanel_tabposition: 3
+autocomp_min_prefix_len: 1
+tab_font_string: Normal
+autocomp_popup_mode: 1
+backup_file: 1
+document_tabposition: 3
+project_suffix: .bfproject
+save_accelmap: 1
+config_version: 2.2.7
+external_command: 3:OpenSCAD Preview:/usr/bin/openscad %f::
+external_command: 3:OpenSCAD Cheat Sheet:firefox http\://www.openscad.org/cheatsheet/index.html::
+switch_tabs_by_altx: 1
+delay_scan_time: 900
+adv_textview_left_margin: 1
+editor_font_string: monospace 10
+max_window_title: 0
+adv_smart_indent_mode: 1
+do_periodic_check: 1
+backup_abort_action: 2
+autosave: 1
+cursor_size: 4
+auto_set_encoding_meta: 1
+restore_dimensions: 1
