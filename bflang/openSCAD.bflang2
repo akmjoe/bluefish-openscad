@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 		Bluefish HTML Editor
-		openSCAD.bflang2 $Revision: 2 $
+		openSCAD.bflang2 $Revision: 3 $
 		
 		@author akmjoe
 
@@ -19,7 +19,7 @@
 		along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<bflang name="OpenSCAD" version="2.0" table="1438" contexts="1" matches="439">
+<bflang name="OpenSCAD" version="2.0">
 <header>
 	<mime type="application/x-openscad"/>
 	<mime type="text/x-openscad" />
@@ -1730,7 +1730,7 @@ May be used with either 2D or 3D objects, but don't mix them.
 	</element>
 </group>
 
-<element id="pod" pattern="=[a-zA-Z][a-zA-Z0-9 _]*[&#10;&#13;]" is_regex="1" starts_block="1" mayfold="1" highlight="comment" />
+<!--<element id="pod" pattern="=[a-zA-Z][a-zA-Z0-9 _]*[&#10;&#13;]" is_regex="1" starts_block="1" mayfold="1" highlight="comment" />-->
 <element pattern="=cut" ends_block="1" blockstartelement="pod" highlight="comment" />
 
 <element pattern="//[^&#10;&#13;]*" is_regex="1" highlight="comment" />
