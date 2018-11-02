@@ -97,7 +97,7 @@
 
 
 <element id="e.lbrace" pattern="{" starts_block="1" highlight="brackets" block_name="Curly brackets block">
-	<autocomplete enable="1" append="}" backup_cursor="1" />
+	<!--<autocomplete enable="1" append="}" backup_cursor="1" />-->
 </element>
 <element pattern="}" ends_block="1" blockstartelement="e.lbrace" highlight="brackets" />
 <element id="e.lbracket" pattern="[" starts_block="1" highlight="brackets">
@@ -109,6 +109,12 @@
 </element>
 <element id="e.rparen" pattern=")" ends_block="1" blockstartelement="e.lparen" highlight="paren" />
 
+<element id="comment" pattern="/*" starts_block="1" highlight="comment" block_name="C style comment">
+	<context symbols="*/" highlight="block-comment" >
+		<element pattern="/*" highlight="error"/>
+		<element pattern="*/" ends_block="1" blockstartelement="e.lcomment" highlight="block-comment" ends_context="1" />
+	</context>
+</element>
 
 <element id="center" pattern="center" highlight="attribute">
 	<autocomplete enable="1" />
@@ -1740,6 +1746,7 @@ May be used with either 2D or 3D objects, but don't mix them.
 <element pattern="[&#10;]+[&#32;]*\*[^&#10;&#13;]*" is_regex="1" highlight="disable"><reference>Disable in preview/render</reference></element>
 <element pattern="[&#9;&#10;&#13;]+[&#32;]*![^&#10;&#13;]*" is_regex="1" highlight="only"><reference>Render only this</reference></element>
 <element pattern="%[^&#10;&#13;]*" is_regex="1" highlight="transparent"><reference>Transparent in preview</reference></element>
+
 
 </context>
 </definition>
