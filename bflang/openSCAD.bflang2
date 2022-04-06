@@ -1004,8 +1004,17 @@ Moving the viewport does not update them. During an animation they are updated f
 <i>$vpt</i> shows translation (i.e. won't be affected by rotate and zoom)&#13;
 <i>$vpd</i> shows the camera distance&#13;</reference>
 	</element>
+    <element pattern="$vpf">
+		<reference>Field of view</reference>
+	</element>
 	<element pattern="$children">
 		<reference>The total number of children in the module instance. Individual children are accesssed by calling <b>children(</b><i>index</i><b>)</b></reference>
+	</element>
+	<element pattern="$preview">
+		<reference>True in preview mode (f5), false on render (f6). Useful for setting special parameters like $fn to a lower value for fast preview:&#13;
+<i>$fn=$preview?20:100;</i>&#13;
+Requires version 2019.05 or greater.
+        </reference>
 	</element>
 </group>
 

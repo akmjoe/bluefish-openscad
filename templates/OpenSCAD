@@ -1,0 +1,44 @@
+/** OpenScad Drawing 
+ *
+ * [description]
+ * 
+ * Author: @author
+ * Drawing units: Milimeters
+ */
+
+/**** Special Variables ****/
+$fn=$preview?20:100;// Segments in round objects
+
+/**** Imported files ****/
+// use <quickthread.scad>;// import functions & modules only
+// include <quickthread.scad>;// import & run code
+
+/**** External drawings ****/
+my_dxf=["name.dxf","layer"];// use later by calling import(file=my_dxf[0], layer=my_dxf[1]);
+
+/**** Variables for outside profile ****/
+
+
+/**** Variables for inside profile ****/
+
+
+/**** Basic Code ****/
+
+
+
+/**** Functions ****/
+
+
+/**** Modules ****/
+/**
+ * Creates a cylinder adjusted for 3d printing hole
+ * Calculates number of segments based on diameter, and adjusts diameter accordingly
+ *
+ * @param float h height
+ * @param float d Diameter 
+ */
+module polyhole(h, d) {
+    n = max(round(2 * d),3);
+    cylinder(h = h, r = (d / 2) / cos (180 / n), $fn = n);
+}
+
