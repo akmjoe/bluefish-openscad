@@ -48,4 +48,15 @@ module polyhole(h, d) {
     n = max(round(2 * d),3);
     cylinder(h = h, r = (d / 2) / cos (180 / n), $fn = n);
 }
+/**
+ * Creates a countersink
+ * Calculates the height based on diameter, head diameter and angle
+ *
+ * @param float d1 Head Diameter
+ * @param float d2 Body Diameter
+ * @param float a Included angle of countersink 
+ */
+module csink(d1=1,d2=2,a=82,$fn=$fn) {
+	cylinder(d1=d1,d2=d2,h=half(d1-d2)/tan(half(a)));
+}
 
