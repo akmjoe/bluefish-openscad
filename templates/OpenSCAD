@@ -8,6 +8,7 @@
 
 /**** Special Variables ****/
 $fn=$preview?20:100;// Segments in round objects
+thick = 1;// wall thickness
 
 /**** Imported files ****/
 // use <quickthread.scad>;// import functions & modules only
@@ -27,7 +28,13 @@ my_dxf=["name.dxf","layer"];// use later by calling import(file=my_dxf[0], layer
 
 
 /**** Functions ****/
-
+function metric(x) = x*25.4;
+function double(x) = x*2;
+function half(x) = x/2;
+function inside(x) = x-thick;
+function insided(x) = x-thick*2;
+function outside(x) = x+thick;
+function outsided(x) = x+thick*2;
 
 /**** Modules ****/
 /**
