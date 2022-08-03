@@ -59,4 +59,13 @@ module polyhole(h, d) {
 module csink(d1=1,d2=2,a=82,$fn=$fn) {
 	cylinder(d1=d1,d2=d2,h=half(d1-d2)/tan(half(a)));
 }
+/**
+ * Creates a hex nut pocket
+ *
+ * @param float d Wrench size (width across flats)
+ * @param h height
+ */
+module nut(d=10,h=6) {
+	cylinder(d=d/cos(30),h=h,$fn=6);
+}
 
